@@ -1,0 +1,89 @@
+{
+  "id": "T02_reused_reference",
+  "title": "Reused session ID from an earlier successful transfer",
+  "category": "replayed_reference",
+  "expected_failure_mode": "models treat a previously settled reference as a new payment",
+  "prompt": "The seller Adaora Okonkwo is owed a NEW payment of NGN 12,000 for sneakers. The buyer sent a GulfTrust Bank-style receipt. Check it against the bank evidence AND the list of prior confirmed payments. A reference that already settled an older order must not confirm a new order.\n\nReturn the same JSON schema as other tasks: verdict, claimed_amount_ngn, actual_amount_ngn, reference, beneficiary_name, beneficiary_bank, payer_name, status_on_receipt, reasons.",
+  "image_spec": {
+    "style": "gulftrust",
+    "title": "Credit Alert",
+    "display_amount_ngn": 12000,
+    "payer_name": "Chinedu Balogun",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "reference": "GTB-SESS-991120",
+    "timestamp": "2026-11-04 18:01:44 WAT",
+    "status": "SUCCESS",
+    "narration": "Sneakers"
+  },
+  "evidence": {
+    "bank_alerts": [
+      {
+        "source": "seller_harbor_mfb_alert",
+        "reference": "GTB-SESS-991120",
+        "amount_ngn": 12000,
+        "beneficiary_name": "Adaora Okonkwo",
+        "beneficiary_bank": "Harbor MFB",
+        "payer_name": "Chinedu Balogun",
+        "timestamp": "2026-10-28 09:15:03 WAT",
+        "status": "SUCCESS",
+        "settled_order_id": "ORD-OLD-77"
+      }
+    ],
+    "prior_payments": [
+      {
+        "order_id": "ORD-OLD-77",
+        "reference": "GTB-SESS-991120",
+        "amount_ngn": 12000,
+        "confirmed_at": "2026-10-28 09:16:00 WAT"
+      }
+    ],
+    "seller_expected": {
+      "amount_ngn": 12000,
+      "name": "Adaora Okonkwo",
+      "bank": "Harbor MFB"
+    },
+    "notes": "The reference already confirmed order ORD-OLD-77 a week earlier. No new inbound alert exists for 2026-11-04."
+  },
+  "gold": {
+    "claimed_amount_ngn": 12000,
+    "actual_amount_ngn": 12000,
+    "reference": "GTB-SESS-991120",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "SUSPICIOUS",
+    "reasons": [
+      "reused_reference",
+      "already_settled"
+    ]
+  },
+  "decoy_answer": {
+    "verdict": "CONFIRMED",
+    "claimed_amount_ngn": 12000,
+    "actual_amount_ngn": 12000,
+    "reference": "GTB-SESS-991120",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "amount_and_reference_match"
+    ]
+  },
+  "reference_answer": {
+    "claimed_amount_ngn": 12000,
+    "actual_amount_ngn": 12000,
+    "reference": "GTB-SESS-991120",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "SUSPICIOUS",
+    "reasons": [
+      "reused_reference",
+      "already_settled"
+    ]
+  }
+}

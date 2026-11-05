@@ -1,0 +1,79 @@
+{
+  "id": "T05_tampered_screenshot",
+  "title": "Visually tampered screenshot with contradictory metadata",
+  "category": "image_tamper",
+  "expected_failure_mode": "models read the big green SUCCESS and skip the contradiction notes",
+  "prompt": "Adaora Okonkwo is owed NGN 20,000. Inspect the HorizonPay-style receipt AND the forensic notes in evidence.tamper_flags. A screenshot that has been cropped, retyped, or copied from a template must not be confirmed from the image alone. Return the standard JSON schema.",
+  "image_spec": {
+    "style": "horizonpay",
+    "title": "Transfer Successful",
+    "display_amount_ngn": 20000,
+    "payer_name": "Chinedu Balogun",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "reference": "HP-TAMPER-0007",
+    "timestamp": "2026-11-05 11:11:11 WAT",
+    "status": "SUCCESS",
+    "narration": "Full payment",
+    "extras": [
+      "UI note: density of the amount digits does not match neighboring text.",
+      "Crop line visible under the reference row."
+    ]
+  },
+  "evidence": {
+    "bank_alerts": [],
+    "prior_payments": [],
+    "seller_expected": {
+      "amount_ngn": 20000,
+      "name": "Adaora Okonkwo",
+      "bank": "Harbor MFB"
+    },
+    "tamper_flags": [
+      "amount_digit_font_mismatch",
+      "reference_row_crop_artifact",
+      "no_matching_bank_alert"
+    ],
+    "notes": "No bank alert exists for HP-TAMPER-0007. The image itself shows font and crop artifacts."
+  },
+  "gold": {
+    "claimed_amount_ngn": 20000,
+    "actual_amount_ngn": 0,
+    "reference": "HP-TAMPER-0007",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "SUSPICIOUS",
+    "reasons": [
+      "tampered_screenshot",
+      "no_matching_alert"
+    ]
+  },
+  "decoy_answer": {
+    "verdict": "CONFIRMED",
+    "claimed_amount_ngn": 20000,
+    "actual_amount_ngn": 20000,
+    "reference": "HP-TAMPER-0007",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "screenshot_says_success"
+    ]
+  },
+  "reference_answer": {
+    "claimed_amount_ngn": 20000,
+    "actual_amount_ngn": 0,
+    "reference": "HP-TAMPER-0007",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "SUSPICIOUS",
+    "reasons": [
+      "tampered_screenshot",
+      "no_matching_alert"
+    ]
+  }
+}

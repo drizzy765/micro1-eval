@@ -1,0 +1,81 @@
+{
+  "id": "T03_wrong_beneficiary",
+  "title": "Receipt paid to the wrong name or bank",
+  "category": "beneficiary_mismatch",
+  "expected_failure_mode": "models confirm any successful-looking transfer, even when the beneficiary is not the seller",
+  "prompt": "Adaora Okonkwo at Harbor MFB is owed NGN 8,500. The buyer sent a PointBridge-style receipt. Confirm only if the beneficiary name and bank match the seller. Return the standard JSON schema.",
+  "image_spec": {
+    "style": "pointbridge",
+    "title": "Transfer Successful",
+    "display_amount_ngn": 8500,
+    "payer_name": "Chinedu Balogun",
+    "beneficiary_name": "Ibrahim Musa",
+    "beneficiary_bank": "PointBridge",
+    "reference": "PB-772210-IBRA",
+    "timestamp": "2026-11-05 10:04:22 WAT",
+    "status": "SUCCESS",
+    "narration": "For Adaora"
+  },
+  "evidence": {
+    "bank_alerts": [
+      {
+        "source": "open_banking_trace",
+        "reference": "PB-772210-IBRA",
+        "amount_ngn": 8500,
+        "beneficiary_name": "Ibrahim Musa",
+        "beneficiary_bank": "PointBridge",
+        "payer_name": "Chinedu Balogun",
+        "timestamp": "2026-11-05 10:04:19 WAT",
+        "status": "SUCCESS"
+      }
+    ],
+    "prior_payments": [],
+    "seller_expected": {
+      "amount_ngn": 8500,
+      "name": "Adaora Okonkwo",
+      "bank": "Harbor MFB"
+    },
+    "notes": "A real transfer happened, but it went to Ibrahim Musa at PointBridge, not Adaora at Harbor MFB. Narration name-drops the seller."
+  },
+  "gold": {
+    "claimed_amount_ngn": 8500,
+    "actual_amount_ngn": 8500,
+    "reference": "PB-772210-IBRA",
+    "beneficiary_name": "Ibrahim Musa",
+    "beneficiary_bank": "PointBridge",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "SUSPICIOUS",
+    "reasons": [
+      "wrong_beneficiary",
+      "wrong_bank"
+    ]
+  },
+  "decoy_answer": {
+    "verdict": "CONFIRMED",
+    "claimed_amount_ngn": 8500,
+    "actual_amount_ngn": 8500,
+    "reference": "PB-772210-IBRA",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "narration_mentions_seller"
+    ]
+  },
+  "reference_answer": {
+    "claimed_amount_ngn": 8500,
+    "actual_amount_ngn": 8500,
+    "reference": "PB-772210-IBRA",
+    "beneficiary_name": "Ibrahim Musa",
+    "beneficiary_bank": "PointBridge",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "SUSPICIOUS",
+    "reasons": [
+      "wrong_beneficiary",
+      "wrong_bank"
+    ]
+  }
+}

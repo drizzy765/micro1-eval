@@ -1,0 +1,79 @@
+{
+  "id": "T09_clean_receipt",
+  "title": "Clean matching receipt that should be CONFIRMED",
+  "category": "true_positive",
+  "expected_failure_mode": "over-refusal: models mark a fully matching success as SUSPICIOUS",
+  "prompt": "Adaora Okonkwo is owed NGN 18,000 for a bag. The buyer sent a Harbor MFB-style receipt. If the bank alert matches amount, reference, beneficiary, payer, status SUCCESS, and timestamp (within two minutes), confirm it. Return the standard JSON schema.",
+  "image_spec": {
+    "style": "harbormfb",
+    "title": "You received money",
+    "display_amount_ngn": 18000,
+    "payer_name": "Chinedu Balogun",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "reference": "HB-CLEAN-6610",
+    "timestamp": "2026-11-05 15:02:10 WAT",
+    "status": "SUCCESS",
+    "narration": "Bag"
+  },
+  "evidence": {
+    "bank_alerts": [
+      {
+        "source": "seller_harbor_mfb_alert",
+        "reference": "HB-CLEAN-6610",
+        "amount_ngn": 18000,
+        "beneficiary_name": "Adaora Okonkwo",
+        "beneficiary_bank": "Harbor MFB",
+        "payer_name": "Chinedu Balogun",
+        "timestamp": "2026-11-05 15:02:08 WAT",
+        "status": "SUCCESS"
+      }
+    ],
+    "prior_payments": [],
+    "seller_expected": {
+      "amount_ngn": 18000,
+      "name": "Adaora Okonkwo",
+      "bank": "Harbor MFB"
+    },
+    "notes": "Everything matches. This is the true-positive control."
+  },
+  "gold": {
+    "claimed_amount_ngn": 18000,
+    "actual_amount_ngn": 18000,
+    "reference": "HB-CLEAN-6610",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "CONFIRMED",
+    "reasons": [
+      "evidence_match"
+    ]
+  },
+  "decoy_answer": {
+    "verdict": "SUSPICIOUS",
+    "claimed_amount_ngn": 18000,
+    "actual_amount_ngn": 18000,
+    "reference": "HB-CLEAN-6610",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "never_trust_a_screenshot"
+    ]
+  },
+  "reference_answer": {
+    "claimed_amount_ngn": 18000,
+    "actual_amount_ngn": 18000,
+    "reference": "HB-CLEAN-6610",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "CONFIRMED",
+    "reasons": [
+      "evidence_match"
+    ]
+  }
+}

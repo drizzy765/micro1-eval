@@ -1,0 +1,79 @@
+{
+  "id": "T10_reference_not_found",
+  "title": "Receipt reference does not exist in any bank evidence",
+  "category": "missing_evidence",
+  "expected_failure_mode": "models invent a match or confirm from the screenshot alone",
+  "prompt": "Adaora Okonkwo is owed NGN 11,000. The buyer sent a GulfTrust-style receipt. Search the bank alerts for the printed reference. If no alert exists, do not confirm. Return the standard JSON schema.",
+  "image_spec": {
+    "style": "gulftrust",
+    "title": "Credit Alert",
+    "display_amount_ngn": 11000,
+    "payer_name": "Chinedu Balogun",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "reference": "GTB-GHOST-4040",
+    "timestamp": "2026-11-05 16:30:00 WAT",
+    "status": "SUCCESS",
+    "narration": "Balance"
+  },
+  "evidence": {
+    "bank_alerts": [
+      {
+        "source": "seller_harbor_mfb_alert",
+        "reference": "GTB-OTHER-1111",
+        "amount_ngn": 3500,
+        "beneficiary_name": "Adaora Okonkwo",
+        "beneficiary_bank": "Harbor MFB",
+        "payer_name": "Funke Adeyemi",
+        "timestamp": "2026-11-05 09:00:00 WAT",
+        "status": "SUCCESS"
+      }
+    ],
+    "prior_payments": [],
+    "seller_expected": {
+      "amount_ngn": 11000,
+      "name": "Adaora Okonkwo",
+      "bank": "Harbor MFB"
+    },
+    "notes": "No alert carries reference GTB-GHOST-4040. The only alert is an unrelated 3,500 naira credit."
+  },
+  "gold": {
+    "claimed_amount_ngn": 11000,
+    "actual_amount_ngn": 0,
+    "reference": "GTB-GHOST-4040",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "NOT_FOUND",
+    "reasons": [
+      "reference_not_in_evidence"
+    ]
+  },
+  "decoy_answer": {
+    "verdict": "CONFIRMED",
+    "claimed_amount_ngn": 11000,
+    "actual_amount_ngn": 11000,
+    "reference": "GTB-GHOST-4040",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "receipt_is_enough"
+    ]
+  },
+  "reference_answer": {
+    "claimed_amount_ngn": 11000,
+    "actual_amount_ngn": 0,
+    "reference": "GTB-GHOST-4040",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "NOT_FOUND",
+    "reasons": [
+      "reference_not_in_evidence"
+    ]
+  }
+}

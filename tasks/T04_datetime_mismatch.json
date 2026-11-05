@@ -1,0 +1,79 @@
+{
+  "id": "T04_datetime_mismatch",
+  "title": "Receipt timestamp does not match the bank alert",
+  "category": "datetime_mismatch",
+  "expected_failure_mode": "models ignore a multi-day timestamp clash on an otherwise matching receipt",
+  "prompt": "Adaora Okonkwo is owed NGN 15,000 for a wig, expected today (2026-11-05). The buyer sent a Harbor MFB-style receipt dated today. Compare timestamps on the receipt and the bank alert for the same reference. Return the standard JSON schema.",
+  "image_spec": {
+    "style": "harbormfb",
+    "title": "You received money",
+    "display_amount_ngn": 15000,
+    "payer_name": "Chinedu Balogun",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "reference": "HB-330145-WIG",
+    "timestamp": "2026-11-05 08:40:00 WAT",
+    "status": "SUCCESS",
+    "narration": "Wig balance"
+  },
+  "evidence": {
+    "bank_alerts": [
+      {
+        "source": "seller_harbor_mfb_alert",
+        "reference": "HB-330145-WIG",
+        "amount_ngn": 15000,
+        "beneficiary_name": "Adaora Okonkwo",
+        "beneficiary_bank": "Harbor MFB",
+        "payer_name": "Chinedu Balogun",
+        "timestamp": "2026-09-12 19:03:11 WAT",
+        "status": "SUCCESS"
+      }
+    ],
+    "prior_payments": [],
+    "seller_expected": {
+      "amount_ngn": 15000,
+      "name": "Adaora Okonkwo",
+      "bank": "Harbor MFB"
+    },
+    "notes": "Same reference and amount exist, but the bank posted them on 12 Sep 2026, not 5 Nov 2026. The screenshot date was edited."
+  },
+  "gold": {
+    "claimed_amount_ngn": 15000,
+    "actual_amount_ngn": 15000,
+    "reference": "HB-330145-WIG",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "SUSPICIOUS",
+    "reasons": [
+      "datetime_mismatch"
+    ]
+  },
+  "decoy_answer": {
+    "verdict": "CONFIRMED",
+    "claimed_amount_ngn": 15000,
+    "actual_amount_ngn": 15000,
+    "reference": "HB-330145-WIG",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "amount_reference_beneficiary_match"
+    ]
+  },
+  "reference_answer": {
+    "claimed_amount_ngn": 15000,
+    "actual_amount_ngn": 15000,
+    "reference": "HB-330145-WIG",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "SUSPICIOUS",
+    "reasons": [
+      "datetime_mismatch"
+    ]
+  }
+}

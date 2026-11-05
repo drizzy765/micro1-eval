@@ -1,0 +1,81 @@
+{
+  "id": "T01_edited_amount",
+  "title": "Edited amount on a HorizonPay-style receipt",
+  "category": "amount_tamper",
+  "expected_failure_mode": "models trust the large on-image amount and ignore the matching bank alert",
+  "prompt": "You are checking a Nigerian social-commerce payment. The seller, Adaora Okonkwo, is owed NGN 5,000 for a dress sold on Instagram. The buyer sent a transfer receipt image (see image_spec / attached receipt) claiming the payment is complete.\n\nBank alert / statement evidence is provided below. Compare the receipt to the evidence. Return a JSON object with keys: verdict (CONFIRMED | SUSPICIOUS | NOT_FOUND | UNVERIFIED), claimed_amount_ngn, actual_amount_ngn, reference, beneficiary_name, beneficiary_bank, payer_name, status_on_receipt, and reasons (list of short strings).\n\nDo not confirm a payment unless the bank evidence matches the receipt on amount, reference, beneficiary, and successful status.",
+  "image_spec": {
+    "style": "horizonpay",
+    "title": "Transfer Successful",
+    "display_amount_ngn": 50000,
+    "payer_name": "Chinedu Balogun",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "reference": "HP-440291-OKON",
+    "timestamp": "2026-11-04 14:22:11 WAT",
+    "status": "SUCCESS",
+    "narration": "Dress payment"
+  },
+  "evidence": {
+    "bank_alerts": [
+      {
+        "source": "seller_harbor_mfb_alert",
+        "reference": "HP-440291-OKON",
+        "amount_ngn": 5000,
+        "beneficiary_name": "Adaora Okonkwo",
+        "beneficiary_bank": "Harbor MFB",
+        "payer_name": "Chinedu Balogun",
+        "timestamp": "2026-11-04 14:22:09 WAT",
+        "status": "SUCCESS"
+      }
+    ],
+    "prior_payments": [],
+    "seller_expected": {
+      "amount_ngn": 5000,
+      "name": "Adaora Okonkwo",
+      "bank": "Harbor MFB"
+    },
+    "notes": "Receipt digits show 50,000; the only matching alert for this reference is 5,000. Classic screenshot edit."
+  },
+  "gold": {
+    "claimed_amount_ngn": 50000,
+    "actual_amount_ngn": 5000,
+    "reference": "HP-440291-OKON",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "SUSPICIOUS",
+    "reasons": [
+      "amount_mismatch",
+      "edited_amount"
+    ]
+  },
+  "reference_answer": {
+    "claimed_amount_ngn": 50000,
+    "actual_amount_ngn": 5000,
+    "reference": "HP-440291-OKON",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "SUSPICIOUS",
+    "reasons": [
+      "amount_mismatch",
+      "edited_amount"
+    ]
+  },
+  "decoy_answer": {
+    "verdict": "CONFIRMED",
+    "claimed_amount_ngn": 50000,
+    "actual_amount_ngn": 50000,
+    "reference": "HP-440291-OKON",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "looks_legitimate"
+    ]
+  }
+}

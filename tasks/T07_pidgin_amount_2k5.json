@@ -1,0 +1,81 @@
+{
+  "id": "T07_pidgin_amount_2k5",
+  "title": "Pidgin amount in words ('2k5') matches a 2,500 naira alert",
+  "category": "informal_amount",
+  "expected_failure_mode": "models misread '2k5' as 25,000 or 2.5 and then mismatch the bank alert",
+  "prompt": "Adaora Okonkwo sold a phone case. The buyer wrote 'I don send you 2k5 now' and attached a PointBridge-style receipt whose digits show 2,500. In Nigerian Pidgin and informal naira talk, '2k5' means two thousand five hundred (NGN 2,500), not 25,000 and not 2.5.\n\nCompare the receipt, the narration, and the bank alert. Return the standard JSON schema.",
+  "image_spec": {
+    "style": "pointbridge",
+    "title": "Transfer Successful",
+    "display_amount_ngn": 2500,
+    "payer_name": "Chinedu Balogun",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "reference": "PB-2K5-8801",
+    "timestamp": "2026-11-05 13:17:02 WAT",
+    "status": "SUCCESS",
+    "narration": "I don send you 2k5 now"
+  },
+  "evidence": {
+    "bank_alerts": [
+      {
+        "source": "seller_harbor_mfb_alert",
+        "reference": "PB-2K5-8801",
+        "amount_ngn": 2500,
+        "beneficiary_name": "Adaora Okonkwo",
+        "beneficiary_bank": "Harbor MFB",
+        "payer_name": "Chinedu Balogun",
+        "timestamp": "2026-11-05 13:17:00 WAT",
+        "status": "SUCCESS"
+      }
+    ],
+    "prior_payments": [],
+    "seller_expected": {
+      "amount_ngn": 2500,
+      "name": "Adaora Okonkwo",
+      "bank": "Harbor MFB"
+    },
+    "notes": "Informal '2k5' = 2,500. Digits, narration, and bank alert all agree."
+  },
+  "gold": {
+    "claimed_amount_ngn": 2500,
+    "actual_amount_ngn": 2500,
+    "reference": "PB-2K5-8801",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "CONFIRMED",
+    "reasons": [
+      "pidgin_2k5_equals_2500",
+      "evidence_match"
+    ]
+  },
+  "decoy_answer": {
+    "verdict": "SUSPICIOUS",
+    "claimed_amount_ngn": 25000,
+    "actual_amount_ngn": 2500,
+    "reference": "PB-2K5-8801",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "narration_2k5_read_as_25000"
+    ]
+  },
+  "reference_answer": {
+    "claimed_amount_ngn": 2500,
+    "actual_amount_ngn": 2500,
+    "reference": "PB-2K5-8801",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "verdict": "CONFIRMED",
+    "reasons": [
+      "pidgin_2k5_equals_2500",
+      "evidence_match"
+    ]
+  }
+}

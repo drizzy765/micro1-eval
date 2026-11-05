@@ -1,0 +1,81 @@
+{
+  "id": "T06_pending_as_success",
+  "title": "Pending transfer presented as a successful payment",
+  "category": "pending_status",
+  "expected_failure_mode": "models treat PENDING as paid because the layout looks like a success screen",
+  "prompt": "Adaora Okonkwo is owed NGN 7,200. The buyer sent a GulfTrust-style screenshot. Read the status field carefully. A transfer that is still PENDING or PROCESSING must not be confirmed. Return the standard JSON schema.",
+  "image_spec": {
+    "style": "gulftrust",
+    "title": "Transfer submitted",
+    "display_amount_ngn": 7200,
+    "payer_name": "Chinedu Balogun",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "reference": "GTB-PEND-5519",
+    "timestamp": "2026-11-05 12:05:40 WAT",
+    "status": "PENDING",
+    "narration": "Goods"
+  },
+  "evidence": {
+    "bank_alerts": [
+      {
+        "source": "seller_harbor_mfb_alert",
+        "reference": "GTB-PEND-5519",
+        "amount_ngn": 7200,
+        "beneficiary_name": "Adaora Okonkwo",
+        "beneficiary_bank": "Harbor MFB",
+        "payer_name": "Chinedu Balogun",
+        "timestamp": "2026-11-05 12:05:40 WAT",
+        "status": "PENDING"
+      }
+    ],
+    "prior_payments": [],
+    "seller_expected": {
+      "amount_ngn": 7200,
+      "name": "Adaora Okonkwo",
+      "bank": "Harbor MFB"
+    },
+    "notes": "Both the receipt and the bank trace say PENDING. No credit has landed."
+  },
+  "gold": {
+    "claimed_amount_ngn": 7200,
+    "actual_amount_ngn": 7200,
+    "reference": "GTB-PEND-5519",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "PENDING",
+    "verdict": "UNVERIFIED",
+    "reasons": [
+      "pending_status",
+      "not_yet_settled"
+    ]
+  },
+  "decoy_answer": {
+    "verdict": "CONFIRMED",
+    "claimed_amount_ngn": 7200,
+    "actual_amount_ngn": 7200,
+    "reference": "GTB-PEND-5519",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "screenshot_looks_like_a_receipt"
+    ]
+  },
+  "reference_answer": {
+    "claimed_amount_ngn": 7200,
+    "actual_amount_ngn": 7200,
+    "reference": "GTB-PEND-5519",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "PENDING",
+    "verdict": "UNVERIFIED",
+    "reasons": [
+      "pending_status",
+      "not_yet_settled"
+    ]
+  }
+}

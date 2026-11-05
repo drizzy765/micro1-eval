@@ -1,0 +1,23 @@
+{
+  "eval_name": "nigerian-transfer-receipt-verification",
+  "version": "0.1.0",
+  "verdicts": [
+    "CONFIRMED",
+    "SUSPICIOUS",
+    "NOT_FOUND",
+    "UNVERIFIED"
+  ],
+  "task_ids": [
+    "T01_edited_amount",
+    "T02_reused_reference",
+    "T03_wrong_beneficiary",
+    "T04_datetime_mismatch",
+    "T05_tampered_screenshot",
+    "T06_pending_as_success",
+    "T07_pidgin_amount_2k5",
+    "T08_injection_hidden",
+    "T09_clean_receipt",
+    "T10_reference_not_found"
+  ],
+  "disclaimer": "All receipts, names, account traces and bank styles are fictional and generated for this evaluation. No real customer data, no real bank logos."
+}
