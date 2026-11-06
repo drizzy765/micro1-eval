@@ -1,18 +1,27 @@
-# Phase 4 progress log — 5 Nov 2026
+# Phase 4 progress log — 5 Nov 2026 (provenance cleanup 6 Nov, no reruns)
 
 ## Harness state (all green)
 
-- `python -m pytest -q` → 11 passed.
+- `python -m pytest -q` → 14 passed (incl. `tests/test_run_dirs.py`).
 - Baseline: 10/10, 0 catastrophic false CONFIRMED.
 - Receipts regenerated (10 PNGs in `assets/`).
-- `results/latest_summary.json` still holds the baseline (a summary writes only on run completion).
+- `results/latest_summary.json` always points at the most recent completed arm;
+  every arm also keeps a timestamped `results/summary-*.json`.
 
 ## Runner changes (in `runner/run.py`, stdlib only)
 
 - New direct backends: `--backend groq`, `--backend gemini`. OpenRouter stays primary.
-- 15s pacing between live calls plus retry with backoff on 429 / 500 / 502 / 503 / 504.
+- 15s pacing between live calls plus retry with backoff on 429 and 5xx; fail
+  fast on spent daily caps (`limit: 20`), 401/402/403/404, and retry transient
+  empty responses.
 - Gemini request carries an explicit `systemInstruction` with the full answer schema
   (first probe returned `{"confirmation": true}` without it).
+- `--backend muse` (vision: PNG + prompt) and `--backend nvidia` (vision) added later;
+  see arm sections below.
+- Provenance: every `run_eval` writes transcripts to a unique
+  `results/runs/<backend>-<model>-<stamp>/` directory and never reuses a
+  non-empty one (regression-tested in `tests/test_run_dirs.py`); the summary
+  records `run_id` and `run_dir`.
 - Keys come from local `.env` only, travel in headers, never appear in transcripts.
   `.env` is untracked; `.env.example` holds empty placeholders.
 
@@ -50,11 +59,15 @@
 
 ## Still pending
 
-- Finish Gemini 3-trial run after quota reset (22/30 saved).
-- Claude arm replaced by Muse (see below); Groq still blocked on its key.
+- Finish Gemini 3-trial run after quota reset (22/30 saved; transcripts intact).
+- Claude arm replaced by Muse (0 Claude transcripts; see below).
 - Groq arm after its key is fixed, or Llama via OpenRouter.
-- Fill `docs/failure_taxonomy.md` from full transcripts; update README numbers;
-  record video; pack ZIP (per `docs/submission_checklist.md`).
+- `results/runs/` collision guard is in place, but `results/runs/` is not yet
+  in `.gitignore` — untracked run directories will show in `git status`;
+  decide whether to ignore or commit them.
+- Fill `docs/failure_taxonomy.md` from preserved transcripts only (GPT
+  excluded); update README numbers; record video; pack ZIP
+  (per `docs/submission_checklist.md`).
 
 ## Claude arm attempt (5 Nov 2026, blocked, 0 transcripts)
 
@@ -82,41 +95,101 @@
   only help per-minute limits and 5xx. Guard: `pytest` 11 passed after the change.
 - Resume needs 8 more calls (T08 run2–run3, T09 ×3, T10 ×3) after the next reset.
 
-## Muse vision arm, three trials (6 Nov 2026, `muse-spark-1.3`, `--runs 3`)
+## NVIDIA direct probe (6 Nov 2026, `deepseek-ai/deepseek-v4.1-flash`, vision) — NO COMPLETED CALLS
 
-- Result: 6/30 passes, 0 false CONFIRMED. Model ID verified from local
+- Backend `--backend nvidia` added (stdlib, prompt + PNG, max_tokens 2000,
+  temp 0.0; refuses text-only if the image is missing).
+- Two T09 probes read-timed-out at 120s and 180s. Zero evaluation calls
+  completed, zero counted. A timeout establishes nothing further: it does not
+  prove auth was accepted, and it does not prove the model itself was
+  unavailable (network path, gateway queuing, and model latency are all still
+  on the table).
+- Per instruction, fell back to `z-ai/glm-5.3-flash` as a separately labelled
+  arm (OpenRouter backend, transcribed-fields modality — labelled by exact
+  model ID in every transcript and summary, no silent switch).
+
+## GLM arm, three trials (6 Nov 2026, `z-ai/glm-5.3-flash` via OpenRouter, TEXT input)
+
+- Result: 6/30 exact-schema passes, 0 false CONFIRMED over 24 completed
+  negative-case trials (0/24). Passes: T01 3/3, T09 3/3.
+- Input-modality warning: this arm received transcribed receipt fields
+  (text), not receipt images. Compare it only with the other text-input arm
+  (GPT); the vision arm (Muse) had different inputs and belongs in a separate
+  comparison.
+- On failed trials the verdict labels were off-schema and unstable across
+  trials: `REJECTED`, `FAIL`, `fraudulent`, `unverifiable`, `rejected`,
+  `unconfirmed`, `NOT_CONFIRMED`, `verified`, `GENUINE`, `VERIFIED`,
+  `not_confirmed`. Sampled raw outputs (T02, T07 run 1) show extracted amounts
+  and reasons consistent with the gold evidence, but fields/reasons alone do
+  not establish verdict correctness — see the semantic-correctness note in
+  Provenance and limitations.
+- Settings: existing prompt unchanged, temperature 0.0, max_tokens 2000.
+  No prompt tuning performed against these tasks, and no label remapping was
+  introduced: the strict grader scores exactly what each model emitted.
+- Data note: transcript files were keyed `{task}__{backend}__run{n}.json`
+  (backend only, no model), so this arm overwrote the 30 GPT trial-level
+  transcript files. GPT aggregates survive intact in
+  `results/summary-openrouter-20261105T203232Z.json` (see GPT section).
+  All future runs write to unique `results/runs/<backend>-<model>-<stamp>/`
+  directories (regression-tested), so this cannot recur.
+
+## Muse vision arm, three trials (6 Nov 2026, `muse-spark-1.3`, VISION input)
+
+- Result: 6/30 exact-schema passes, 0 false CONFIRMED over 24 completed
+  negative-case trials (0/24). Model ID verified from local
   Sell-Safe config (`META_VISION_MODEL=muse-spark-1.3`); `muse-wonder-1.0`
   appears only in docs and was not used.
 - Modality: vision — each call sends the receipt PNG plus the standard eval
-  prompt. Passes: T01 3/3, T09 3/3. All other tasks 0/3.
-- Headline finding: with the actual image in context, reasons are excellent
-  (T02 cites the settled prior order and timestamp clash; T07 explains that
-  '2k5' means NGN 2,500) but verdict labels stay off-schema: `invalid`,
-  `mismatch`, `fraudulent`, `fabricated`, `fake`, `pending`, `legit`,
-  `UNCONFIRMED`, `NOT_CONFIRMED`, `unconfirmed` — plus legal-but-wrong
-  `UNVERIFIED` on T03/T04/T05. Judgment right, verdict contract failed.
+  prompt. Passes: T01 3/3, T09 3/3. All other tasks 0/3. Keep this arm in a
+  separate comparison from the text-input arms (GPT, GLM): inputs differed.
+- On failed trials the verdict labels were off-schema: `invalid`, `mismatch`,
+  `fraudulent`, `fabricated`, `fake`, `pending`, `legit`, `UNCONFIRMED`,
+  `NOT_CONFIRMED`, `unconfirmed` — plus legal-but-wrong `UNVERIFIED` on
+  T03/T04/T05. Sampled raw outputs (T02, T07 run 1) show reasons that track the
+  gold evidence (settled prior order and timestamp clash; '2k5' = NGN 2,500),
+  but that is a qualitative observation, not a correctness metric — see
+  Provenance and limitations.
 - Sandbox DNS for `api.meta.ai` flaked twice mid-session (transient; probes
   passed between failures). Runner now retries transient network errors and
   empty responses, and fails fast on 401/402/403/404 and daily caps.
 - This arm overwrote `results/latest_summary.json`; GPT 3-trial and baseline
   records live in their timestamped `results/summary-*.json` files.
 
-## GPT arm, three trials (5 Nov 2026, `openai/gpt-4.1-mini`, `--runs 3`)
+## GPT arm, three trials (5 Nov 2026, `openai/gpt-4.1-mini` via OpenRouter, TEXT input) — AGGREGATE-ONLY
 
-- Result: 6/30 passes, 0 catastrophic false CONFIRMED.
-- Passes: T01 3/3 (edited amount → SUSPICIOUS), T09 3/3 (clean → CONFIRMED).
-  All other tasks 0/3 with mean field scores 0.34–0.4.
-- Headline finding: the model's fields and reasons are RIGHT on the failed
-  tasks (it names the reused reference, the PENDING status, the 2,500 pidgin
-  match) but its verdict labels are off-schema and consistent across trials:
-  `rejected` (T02, T03, T05), `not_confirmed` (T06), `valid` (T07),
-  `discrepancy_detected` once (T04), `UNVERIFIED` instead of SUSPICIOUS (T08),
-  `unconfirmed` instead of NOT_FOUND (T10). Judgment passes; the verdict
-  contract fails. See `results/transcripts/*__openrouter__run*.json`.
-- Consistency note: identical wrong labels across all 3 trials — systematic,
-  not sampling noise.
+- Result: 6/30 exact-schema passes, 0 false CONFIRMED over 24 completed
+  negative-case trials (0/24). Passes: T01 3/3, T09 3/3.
+- Provenance warning: this arm's 30 trial-level transcript files were
+  overwritten by the later GLM arm (old backend-only file keying) and are
+  unrecoverable — never committed (git-ignored), no stash, no backups, and raw
+  responses are never reconstructed from aggregates. What survives is the
+  timestamped summary (`results/summary-openrouter-20261105T203232Z.json`):
+  per-task passes, mean scores, catastrophic counts. Quote those tallies only.
+- Therefore GPT is EXCLUDED from transcript-based analysis (no per-trial
+  verdict-label claims, no reason-quote claims). The label lists recorded
+  during the live run are dropped as unverifiable.
 - Runner fixes that enabled this arm: `max_tokens: 2000` on OpenRouter/Groq
   (was reserving 65k tokens per call → 402 on low credits) and the explicit
   answer-schema system prompt (was returning `{"confirmation": true}`).
 - Note: this arm overwrote `results/latest_summary.json`; the baseline 10/10
   record lives in `results/summary-baseline-20261105T193929Z.json`.
+
+## Provenance and limitations (read before quoting numbers)
+
+- Exact-schema pass rate is the only correctness metric: verdict match AND all
+  compared fields match under the strict grader. No label remapping exists or
+  will be added to flatter a model.
+- Semantic verdict correctness is NOT established by correct fields or good
+  reasons. A model can extract every amount and still fail the verdict
+  contract; that is the finding, not a near-pass.
+- False CONFIRMED is reported against completed negative-case trials only
+  (gold verdict is not CONFIRMED): baseline 0/8, GPT 0/24, Muse 0/24, GLM 0/24,
+  Gemini partial 0/19 (22 saved trials, T07 ×3 excluded). Quota errors, parse
+  failures, and timeouts are transport problems, never counted as answers.
+- Zero observed false CONFIRMED is an observation at this sample size, not
+  proof of zero risk. No arm exceeds 30 trials.
+- Historical summaries are byte-for-byte unchanged; `results/latest_summary.json`
+  is a pointer that each completed arm legitimately overwrites.
+- No prompt was tuned against these tasks and no arm was rerun to lift its
+  score. The Gemini arm is incomplete (22/30); its numbers are partial.
+- GPT is aggregate-only (see above): tallies citable, wording not.
