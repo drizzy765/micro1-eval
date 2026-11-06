@@ -1,6 +1,14 @@
 # Failure taxonomy (fill after the model runs)
 
-Use this sheet while reading `results/transcripts/`. Quote the model. Do not invent a pattern that the transcripts do not show.
+Use this sheet while reading a run directory under `results/runs/` (one
+`<backend>-<model>-<stamp>/` directory per run; never mix arms). Quote the
+model. Do not invent a pattern that the transcripts do not show.
+
+Transcript-based analysis requires the arm's raw transcripts. Arms whose
+transcripts are lost are aggregate-only (summary JSON): quote their tallies,
+never their wording. The GPT arm (`openai/gpt-4.1-mini`) is aggregate-only —
+its trial-level transcripts were overwritten before per-run directories
+existed — so it is excluded from transcript-based analysis below.
 
 ## How to tag a trial
 

@@ -14,7 +14,7 @@ flowchart LR
   subgraph score [Scoring]
     R[runner/run.py]
     GR[grader/grade.py]
-    TX[results/transcripts]
+    TX[results/runs/&lt;run-id&gt;]
     S[results/latest_summary.json]
   end
   T --> G --> A

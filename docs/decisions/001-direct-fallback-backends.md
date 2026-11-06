@@ -59,3 +59,13 @@ live calls, and retry with backoff on 429/500/502/503/504.
 - Known issue logged in `reports/phase4_progress.md`: the old Groq key hits
   HTTP 403 error 1010 (blocked or restricted); Gemini free tier caps at ~20
   requests/day, which paused the 30-call Phase 4 run at 13/30 transcripts.
+- `--backend nvidia` (added 6 Nov 2026, NIM endpoint, vision) probed twice on
+  T09 with `deepseek-ai/deepseek-v4.1-flash`: read time-outs at 120s and 180s,
+  zero completed calls, zero counted. A timeout proves neither that auth was
+  accepted nor that the model was unavailable. The separately labelled
+  `z-ai/glm-5.3-flash` arm (OpenRouter, transcribed-fields text input — not
+  NVIDIA-hosted vision) ran instead: 6/30 exact-schema passes, 0 false
+  CONFIRMED over 24 negative-case trials. Keep it in a separate comparison
+  from image-input arms. Transcript files were keyed by backend only, so the
+  GLM arm overwrote GPT trial-level transcripts (unrecoverable; GPT is now
+  aggregate-only); all future runs use unique `results/runs/` directories.

@@ -31,7 +31,8 @@ Timi still does today:
    - GPT (OpenAI, via OpenRouter)
    - Claude (Anthropic)
    - Gemini (Google)
-3. Save every raw transcript under `results/transcripts/`.
+3. Save every raw transcript in its run directory under `results/runs/`
+   (the runner creates `<backend>-<model>-<stamp>/` and refuses to overwrite).
 4. Fill `docs/failure_taxonomy.md` from the actual transcripts. Quote the model, do not paraphrase away the mistake.
 5. Add charts in `reports/` (pass rate by task, false-CONFIRMED rate by model, confusion-style table). A simple matplotlib or even a hand-built markdown table is fine; the laptop is weak, skip heavyweight notebooks.
 6. If a task is ambiguous (two reasonable golds), fix the gold and the prompt. Re-run the grader tests. Never silently change a gold to make a model look worse.
