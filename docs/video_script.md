@@ -36,11 +36,15 @@ Flip through four images, one sentence each:
 
 On screen: the summary table from `docs/failure_taxonomy.md` and `results/latest_summary.json`.
 
-Say the real numbers. Example shape (replace with yours):
+Say the real numbers (audited 6 Nov 2026, 112 completed model trials):
 
-> We ran GPT, Claude and Gemini three times each, plus a cheap OpenRouter model while building. The deterministic baseline — the same rules we use in Sell-Safe — scored ten out of ten with zero false confirms. The frontier models ... [X false CONFIRMED on edited amounts / reused references / injections]. Here is Claude calling T01 CONFIRMED because the screenshot "looks official." Here is GPT treating "2k5" as unknown. That is the failure that matters: a seller would have released goods.
+> We ran GPT-4.1-mini, Muse Spark, and GLM 5.3 Flash three times on each of ten tasks, plus a partial Gemini arm blocked by quota at 22 trials. The deterministic baseline — the same rules we use in Sell-Safe — scored ten out of ten with zero false confirms. Every frontier arm scored 6 out of 30 with zero false CONFIRMED: nobody confirmed a fake receipt. But almost nobody used the required verdicts either. Here is Muse, looking at the actual receipt image, answering "legit" on a reused reference it correctly identified as already settled. Here is GLM answering "verified" on a '2k5' amount it correctly parsed as 2,500 naira. A seller reading "legit" or "verified" releases the goods — that is the failure that matters, even though the grader scores it zero.
 
-Do not overclaim. If a model does well, say so and show the remaining qualitative mistakes.
+Then add one honesty beat, on screen with the limitations list:
+
+> Caveats, all published: 30 trials per arm at most, so zero false confirms is an observation, not proof of safety. GPT's trial transcripts were lost to a file-keying bug before per-run directories existed, so it contributes tallies only. Gemini is partial at 22 of 30. Text-input and vision-input arms are compared separately because their inputs differed.
+
+Do not overclaim. Say plainly that T01 and T09 pass 3/3 on every arm that attempted them (Gemini never attempted T09), and that semantic correctness beyond the strict verdict is unresolved.
 
 ## 3:40–4:30 — How to rerun, and close
 

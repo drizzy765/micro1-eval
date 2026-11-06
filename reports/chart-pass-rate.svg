@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="300" role="img" aria-label="Exact-schema pass rate by arm">
+<text x="20" y="24" font-family="sans-serif" font-size="15" font-weight="bold">Exact-schema pass rate by arm</text>
+<text x="20" y="42" font-family="sans-serif" font-size="11" fill="#555">verdict match AND all compared fields match (strict grader)</text>
+<g font-family="sans-serif" font-size="12">
+<text x="20" y="80">baseline (deterministic)</text><rect x="230" y="64" width="280" height="18" fill="#2e7d32"/><text x="515" y="79">100% (10/10)</text>
+<text x="20" y="110">GPT-4.1-mini (text, aggregate-only)</text><rect x="230" y="94" width="56" height="18" fill="#c62828"/><text x="291" y="109">20% (6/30)</text>
+<text x="20" y="140">Muse Spark 1.3 (vision)</text><rect x="230" y="124" width="56" height="18" fill="#1565c0"/><text x="291" y="139">20% (6/30)</text>
+<text x="20" y="170">GLM 5.3 Flash (text)</text><rect x="230" y="154" width="56" height="18" fill="#6a1b9a"/><text x="291" y="169">20% (6/30)</text>
+<text x="20" y="200">Gemini 2.5 Flash (text, partial)</text><rect x="230" y="184" width="38" height="18" fill="#ef6c00"/><text x="273" y="199">13.6% (3/22)</text>
+</g>
+<text x="20" y="240" font-family="sans-serif" font-size="11" fill="#555">0 false CONFIRMED in every arm (baseline 0/8, GPT 0/24, Muse 0/24, GLM 0/24, Gemini 0/19 negative-case trials).</text>
+<text x="20" y="258" font-family="sans-serif" font-size="11" fill="#555">Small samples (&#8804;30/arm): zero observed is not proof of zero risk. Source: results/audit-20261106.json.</text>
+<text x="20" y="282" font-family="sans-serif" font-size="11" fill="#555">Bars: exact-schema passes / completed trials. Frontier failures are verdict-label failures, not amount errors.</text>
+</svg>
