@@ -193,3 +193,13 @@
 - No prompt was tuned against these tasks and no arm was rerun to lift its
   score. The Gemini arm is incomplete (22/30); its numbers are partial.
 - GPT is aggregate-only (see above): tallies citable, wording not.
+
+## Gemini arm, third attempt (6 Nov 2026, probe passed, run died fast)
+
+- One T09 probe passed (`CONFIRMED`, 1.0), then the full run died on the daily
+  cap almost immediately — fail-fast worked, only ~2 quota calls burned.
+- 22 legacy transcripts intact; 1 new trial saved in its own run dir
+  (`results/runs/gemini-gemini-2.5-flash-20261106T204918Z/`, T01 run 1,
+  SUSPICIOUS, passed). Unique-dir routing held: no overwrites.
+- Lesson: a passing probe does not imply arm capacity on a ~20/day cap.
+  Next attempt should wait for a fuller reset (next day), not minutes.

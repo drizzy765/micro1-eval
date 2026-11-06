@@ -49,6 +49,28 @@ micro1 rewards **clear, meaningful failures of frontier models**, not a product 
 
 Do not pack 50 real customer receipts. That collides with the "no confidential data" rule and takes too long. These 10 synthetic tasks are the eval.
 
+## Results (audited 6 Nov 2026)
+
+On 112 completed model trials, no frontier model confirmed a fake receipt —
+but none complied with the required verdict contract either:
+
+| Arm | Input | Exact-schema pass | False CONFIRMED |
+| --- | --- | --- | --- |
+| Baseline (deterministic rules) | structured fields | 10/10 | 0/8 |
+| GPT-4.1-mini (aggregate-only) | text | 6/30 | 0/24 |
+| Muse Spark 1.3 (vision: PNG + prompt) | image | 6/30 | 0/24 |
+| GLM 5.3 Flash (text) | text | 6/30 | 0/24 |
+| Gemini 2.5 Flash (partial, 22/30) | text | 3/22 | 0/19 |
+
+Denominators are completed negative-case trials only. T01 and T09 pass
+everywhere attempted; all other failures are off-schema verdict labels
+(`REJECTED`, `legit`, `verified`, …) on trials whose reasons usually track
+the evidence — unreliable compliance with the contract, not proof of fraud
+detection, and zero observed at this sample size is not proof of safety.
+Machine-readable audit: `results/audit-20261106.json`. Full write-up:
+`reports/eval-report.md`. Failure taxonomy with quoted transcripts:
+`docs/failure_taxonomy.md`.
+
 ## Layout
 
 ```
