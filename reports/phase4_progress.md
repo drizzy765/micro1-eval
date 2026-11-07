@@ -81,7 +81,16 @@
   30 GPT transcripts plus 13 Gemini transcripts are intact.
 - To unblock: top up at https://openrouter.ai/settings/credits, then run
   `.\.venv\Scripts\python.exe -m runner.run --backend openrouter --model anthropic/claude-sonnet-4.5 --runs 3`.
-  Update `docs/description_draft.md` if a different Claude ID is used.
+  ~~Update `docs/description_draft.md` if a different Claude ID is used.~~
+  (Superseded: Claude arm dropped 7 Nov, see section below.)
+
+## Claude arm dropped (7 Nov 2026, user decision — cost)
+
+- Two probes (5 Nov, 7 Nov) both failed with OpenRouter 402 (only ~1764 of
+  2000 tokens affordable). User confirmed topping up is not affordable now.
+- Claude removed from scope: no further probes or runs planned, 0 transcripts
+  exist so nothing to preserve. Frontier coverage rests on GPT-4.1-mini,
+  Muse Spark vision, GLM 5.3 Flash, and the partial Gemini arm.
 
 ## Gemini arm, second attempt (5 Nov 2026, blocked at 22/30)
 
@@ -107,6 +116,16 @@
 - Per instruction, fell back to `z-ai/glm-5.3-flash` as a separately labelled
   arm (OpenRouter backend, transcribed-fields modality — labelled by exact
   model ID in every transcript and summary, no silent switch).
+
+## NVIDIA model sweep (7 Nov 2026) — account provisioned for none of them
+
+- `/v1/models` lists 84 IDs (auth valid), but probing fails per model:
+  `microsoft/phi-3-vision-128k-instruct` 404, `nvidia/vila` 404,
+  `nvidia/neva-22b` 404 ("Not found for account"), while
+  `meta/llama-3.2-90b-vision-instruct` times out like deepseek did.
+- 4 models tried total, 0 completed calls. NVIDIA declared exhausted: this
+  account is not provisioned for the vision functions and reachable ones
+  time out. No further NVIDIA attempts without a provisioned model ID.
 
 ## GLM arm, three trials (6 Nov 2026, `z-ai/glm-5.3-flash` via OpenRouter, TEXT input)
 
@@ -203,3 +222,36 @@
   SUSPICIOUS, passed). Unique-dir routing held: no overwrites.
 - Lesson: a passing probe does not imply arm capacity on a ~20/day cap.
   Next attempt should wait for a fuller reset (next day), not minutes.
+
+## Gemini arm, fourth attempt (7 Nov 2026, full-day reset, died at 20/30)
+
+- T09 probe passed (`CONFIRMED`), then `--runs 3` launched in a unique run
+  dir (`results/runs/gemini-gemini-2.5-flash-20261107T155024Z/`).
+- 20/30 trials landed (T01–T06 complete, T07 run1–run2), then the run died on
+  the same daily cap: `429 ... generate_content_free_tier_requests, limit: 20`.
+  Probe (1 call) + 20 landed calls = 21 against a ~20/day quota — consistent
+  with the cap, not a code defect. Fail-fast raised immediately, no quota
+  burned on retries.
+- Per triage: reproducible (third identical cap failure), localized to the
+  external free-tier quota (not runner code), no code fix indicated — retrying
+  now would fail identically. Guard already in place (fail-fast on
+  `limit: 20`, unique run dirs, 15s pacing). Next attempt only after the next
+  full daily reset; do not run single-task probes beforehand since each probe
+  burns one capped call.
+- 22 legacy transcripts plus the 20 new trials all intact; no overwrites.
+  No summary was written (the run dies before the summary step) — the tally
+  above comes from counting trial files in the run dir.
+
+## Gemini fifth attempt (7 Nov 2026, NEW project key, failed on call #1)
+
+- User supplied a fresh AI Studio key created under a new project (fingerprint
+  changed). Full `--runs 3` died on the FIRST call with the same
+  `429 ... generate_content_free_tier_requests, limit: 20`.
+- A single probe 100s later failed identically → not a per-minute bucket.
+  A brand-new project key failing on lifetime call #1 points to account/project
+  free-tier ineligibility (or provisioning delay), not exhaustion. Unfixable
+  from the runner; fail-fast behaved correctly.
+- Groq re-probed same session: still HTTP 403 error 1010. No spend, still dropped.
+- Decision: no further Gemini/Groq attempts without a key proven working in
+  AI Studio first. Submit on completed arms + partials (see eval-report
+  limitations).

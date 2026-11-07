@@ -29,7 +29,7 @@ Timi still does today:
 1. Generate all receipt PNGs: `python -m generator.write_assets`.
 2. Run 3 trials each on at least one free model (build) and start the frontier set:
    - GPT (OpenAI, via OpenRouter)
-   - Claude (Anthropic)
+   - ~~Claude (Anthropic)~~ — dropped 7 Nov (credits unaffordable, user decision)
    - Gemini (Google)
 3. Save every raw transcript in its run directory under `results/runs/`
    (the runner creates `<backend>-<model>-<stamp>/` and refuses to overwrite).

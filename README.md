@@ -41,7 +41,7 @@ Copy-Item .env.example .env
 .\venv\Scripts\python.exe -m runner.run --backend openrouter --model openai/gpt-4.1-mini --runs 3
 ```
 
-Free OpenRouter models are fine while building. The submission run should include at least one frontier model each from OpenAI (GPT), Anthropic (Claude) and Google (Gemini), 3 runs per task.
+Free OpenRouter models are fine while building. The submission run covers GPT-4.1-mini (OpenRouter, text), Muse Spark (direct, vision), GLM 5.3 Flash (OpenRouter, text), and a quota-capped partial Gemini arm, 3 runs per task. (Claude was dropped 7 Nov — OpenRouter credits unaffordable.)
 
 ## What "good" looks like to the judges
 
