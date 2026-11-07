@@ -72,12 +72,20 @@ problems, never counted as answers. Full record: `results/audit-20261106.json`.
    now fixed; tallies citable, wording not.
 4. Gemini is partial (22/30); T09–T10 unattempted there.
 5. NVIDIA direct: 2 timed-out probes, 0 completed calls — proves nothing
-   about auth or the model; excluded from all metrics.
+   about auth or the model; excluded from all metrics. Groq direct likewise
+   0 completed calls (HTTP 403); Groq/Llama dropped unless its key is fixed.
 6. Text-input arms (GPT, GLM, Gemini) and the vision arm (Muse) had different
    inputs; compare within modality only.
 7. Old project keys can be revoked, throttled, or restricted without notice
    (observed: Groq 403, OpenRouter 402, Gemini 429).
 8. No prompt was tuned against these tasks; no arm was rerun to lift a score.
+9. Claude arm dropped (7 Nov, cost): OpenRouter 402 on two probes, user
+   removed it from scope. 0 Claude transcripts exist; excluded from all
+   metrics.
+10. Gemini capped at partial (7 Nov): even a new-project key 429s on lifetime
+    call #1 with `limit: 20`, and a 100s-later probe agrees — not a
+    per-minute bucket. Groq still 403. No further live attempts without a key
+    proven working in AI Studio first.
 
 ## Reproduce
 

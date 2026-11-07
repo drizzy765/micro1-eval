@@ -59,7 +59,7 @@ Confirm the ZIP is under 50 MB (`Length` < 52428800).
 
 - [ ] `python -m pytest -q` → 11 passed
 - [ ] Baseline: 10/10, 0 false CONFIRMED
-- [ ] Frontier runs exist: GPT, Claude, Gemini, 3 trials each
+- [ ] Frontier runs exist: GPT, Muse, GLM, 3 trials each (+ Gemini partial); Claude dropped 7 Nov (cost)
 - [ ] `docs/failure_taxonomy.md` filled from transcripts, not from memory
 - [ ] README quotes the headline false-CONFIRMED rates
 - [ ] Video follows `docs/video_script.md` and is watchable without a login wall

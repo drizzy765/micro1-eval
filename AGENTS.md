@@ -41,7 +41,7 @@ Older Windows PowerShell 5 may not support `&&`. Use `;` or separate lines. Do n
 2. Do not weaken the catastrophic false-CONFIRMED rule to lift a model's score.
 3. Generate receipts with `python -m generator.write_assets` after any `image_spec` edit.
 4. Run the baseline after task edits: it must stay at 10/10 with 0 false CONFIRMED. If it fails, fix the baseline or the gold, and write down why.
-5. Only then call OpenRouter. Default to a free model while iterating. Frontier models (GPT, Claude, Gemini) are for the recorded submission runs, 3 trials each.
+5. Only then call OpenRouter. Default to a free model while iterating. Frontier models (GPT, Gemini) are for the recorded submission runs, 3 trials each. (Claude dropped 7 Nov — credits unaffordable, user decision.)
 6. Save raw transcripts. Do not hand-edit them.
 7. Fill `docs/failure_taxonomy.md` from those transcripts.
 8. When zipping for HackerRank, exclude `.venv`, `.env`, `__pycache__`, videos, and anything that would push the archive over 50 MB.
