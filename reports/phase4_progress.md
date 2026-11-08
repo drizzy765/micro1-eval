@@ -57,14 +57,14 @@
 .\.venv\Scripts\python.exe -m runner.run --backend baseline --runs 1
 ```
 
-## Still pending
+## Still pending (updated 8 Nov 2026)
 
-- Finish Gemini 3-trial run after quota reset (22/30 saved; transcripts intact).
+- ~~Finish Gemini 3-trial run after quota reset~~ — DONE 8 Nov (30/30, see entry below).
 - Claude arm replaced by Muse (0 Claude transcripts; see below).
-- Groq arm after its key is fixed, or Llama via OpenRouter.
-- `results/runs/` collision guard is in place, but `results/runs/` is not yet
-  in `.gitignore` — untracked run directories will show in `git status`;
-  decide whether to ignore or commit them.
+- Groq arm after its key is fixed, or Llama via OpenRouter (re-probed 8 Nov: still HTTP 403 error 1010, still dropped).
+- `results/runs/` collision guard is in place, and `results/runs/` IS in
+  `.gitignore` (lines 10–11, with `results/transcripts/`) — run dirs no
+  longer show in `git status`; decision: ignore, do not commit.
 - Fill `docs/failure_taxonomy.md` from preserved transcripts only (GPT
   excluded); update README numbers; record video; pack ZIP
   (per `docs/submission_checklist.md`).
@@ -241,6 +241,22 @@
 - 22 legacy transcripts plus the 20 new trials all intact; no overwrites.
   No summary was written (the run dies before the summary step) — the tally
   above comes from counting trial files in the run dir.
+
+## Gemini arm COMPLETED (8 Nov 2026, 30/30 after daily reset)
+
+- Resumed with the original key after the full daily reset: 8 missing trials
+  (T08 run2–run3, T09 ×3, T10 ×3) landed first try, no pre-probe (each probe
+  burns a capped call), 15s pacing, fail-fast guard untouched.
+- New run dir `results/runs/gemini-gemini-2.5-flash-20261108T172302Z/` holds
+  the 8 new trial JSONs; the 22 legacy transcripts in `results/transcripts/`
+  are intact. Combined tally: 6/30 (T01 3/3, T09 3/3), 0 catastrophic,
+  0/24 false CONFIRMED over completed negatives.
+- New labels observed: T08 run2–3 `REJECTED`, T09 ×3 `CONFIRMED` (pass),
+  T10 ×3 `unconfirmed` — same verdict-contract failure shape as every other
+  arm. Combined summary: `results/summary-gemini-gemini-2.5-flash-20261108T172302Z.json`;
+  arm audit: `results/audit-20261108-gemini-complete.json`.
+- Docs updated to completed numbers (eval-report, taxonomy, README, charts,
+  video script, description draft short version re-verified at exactly 900 chars).
 
 ## Gemini fifth attempt (7 Nov 2026, NEW project key, failed on call #1)
 

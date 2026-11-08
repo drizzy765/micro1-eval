@@ -1,0 +1,25 @@
+Clean-room reproduction check — 8 Nov 2026 (UTC 19:0x)
+
+Method (no secrets, no network model calls):
+- Copied the repo to /tmp/cleanroom-tree excluding .venv, .git, .env,
+  results/runs, results/transcripts, __pycache__.
+- Fresh venv: python3 -m venv /tmp/cleanroom-venv; pip install -r requirements.txt.
+- Ran pytest and the baseline there. The clean tree never saw this repo's
+  keys, prior run dirs, or transcripts.
+
+Observed output (copied verbatim):
+- pytest: "14 passed"
+- baseline: passes 10, pass_rate 1.0, catastrophic_false_confirmed 0,
+  n_predictions 10
+
+Cross-checks against this repo:
+- Clean-room per-task baseline results identical to
+  results/summary-baseline-sellsafe_deterministic_baseline-20261108T172142Z.json
+  (same per-task passes).
+- Per-file SHA-256 of all 10 task JSONs identical between clean tree and repo.
+  (The summary's manifest dict keys are absolute paths, so the dicts differ
+  by path prefix only — per-file hashes match. Known cosmetic wart, not a
+  task-content difference.)
+
+Conclusion: a judge with Python 3.10, pip, and no API keys reproduces the
+test suite and the 10/10 baseline from a clean checkout.
