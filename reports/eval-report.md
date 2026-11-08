@@ -25,13 +25,13 @@ added. The deterministic baseline (Sell-Safe-inspired rules, no model)
 scores 10/10 with 0 false CONFIRMED — it is a reference implementation for
 comparison, not a model and not proof of general safety.
 
-## Arms (separate text-input from vision-input comparisons)
+## Arms (separate text-input from vision-plus-text comparisons)
 
 | Arm | Input | Trials | Exact-schema pass | False CONFIRMED |
 | --- | --- | --- | --- | --- |
 | Baseline (rules) | structured fields | 10 | 10/10 | 0/8 |
 | GPT-4.1-mini, OpenRouter (aggregate-only) | text | 30 | 6/30 | 0/24 |
-| Muse Spark 1.3, direct (model ID verified) | vision: PNG + prompt | 30 | 6/30 | 0/24 |
+| Muse Spark 1.3, direct (model ID verified) | vision-plus-text: PNG + prompt | 30 | 6/30 | 0/24 |
 | GLM 5.3 Flash, OpenRouter | text | 30 | 6/30 | 0/24 |
 | Gemini 2.5 Flash, direct (completed 8 Nov) | text | 30 | 6/30 | 0/24 |
 
@@ -79,7 +79,7 @@ open `reports/charts.html` in a browser. LaTeX version of this report:
    about auth or the model; excluded from all metrics. Groq direct likewise
    0 completed calls (HTTP 403 error 1010, re-probed 8 Nov, still blocked);
    Groq/Llama stays dropped unless its key is fixed.
-6. Text-input arms (GPT, GLM, Gemini) and the vision arm (Muse) had different
+6. Text-input arms (GPT, GLM, Gemini) and the vision-plus-text arm (Muse) had different
    inputs; compare within modality only.
 7. Old project keys can be revoked, throttled, or restricted without notice
    (observed: Groq 403, OpenRouter 402, Gemini 429).
@@ -106,10 +106,15 @@ prompts only. Grader, golds, reference/decoy answers and scores are untouched.
   runner system prompt does not either; each model call is isolated. So most
   pure-label failures are consistent with the model never being shown the
   label set — a prompt-design confound we disclose rather than defend.
-- The finding that survives the confound is unreliability: 15 of 30 task-arms
-  returned 2+ distinct verdict strings across 3 runs at temperature 0.0
-  (e.g. Muse T04: `mismatch` / `UNVERIFIED` / `fraudulent`), plus the 5 parse
-  fallbacks. Same receipt, same prompt, different answer on retry.
+- The finding that survives the confound is raw-string variation: 15 of 30
+  task-arms returned 2+ distinct verdict strings across 3 runs at temperature
+  0.0 (e.g. Muse T04: `mismatch` / `UNVERIFIED` / `fraudulent`). Case-only
+  pairs (`INVALID`/`invalid`) and near-synonyms (`REJECTED`/`rejected`) are
+  string differences the case-insensitive grader scores identically, so they
+  are reported as variation, not as proven contradictory decisions. The 5
+  parse fallbacks are completed model responses with unparseable content —
+  not transport errors: quota errors and timeouts kill the run before any
+  transcript is written, and are never counted as answers.
 
 ## Reproduce
 

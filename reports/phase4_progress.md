@@ -62,9 +62,9 @@
 - ~~Finish Gemini 3-trial run after quota reset~~ — DONE 8 Nov (30/30, see entry below).
 - Claude arm replaced by Muse (0 Claude transcripts; see below).
 - Groq arm after its key is fixed, or Llama via OpenRouter (re-probed 8 Nov: still HTTP 403 error 1010, still dropped).
-- `results/runs/` collision guard is in place, and `results/runs/` IS in
-  `.gitignore` (lines 10–11, with `results/transcripts/`) — run dirs no
-  longer show in `git status`; decision: ignore, do not commit.
+- `results/runs/` collision guard is in place. Superseded 8 Nov (packaging
+  pass): `results/runs/` + `results/transcripts/` removed from `.gitignore`
+  and committed as screened public evidence (no keys, no PII) — see Task 3.
 - Fill `docs/failure_taxonomy.md` from preserved transcripts only (GPT
   excluded); update README numbers; record video; pack ZIP
   (per `docs/submission_checklist.md`).

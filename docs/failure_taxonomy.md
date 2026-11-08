@@ -2,7 +2,7 @@
 
 Quoting rule: every quote below is copied from a saved transcript file, cited
 by path. Models are compared only within the same input modality: text-input
-arms are GPT-4.1-mini and GLM 5.3 Flash; the vision arm is Muse Spark 1.3.
+arms are GPT-4.1-mini and GLM 5.3 Flash; the vision-plus-text arm is Muse Spark 1.3 (receipt PNG plus the standard text prompt).
 Gemini 2.5 Flash (text) is complete (30/30, finished 8 Nov). GPT is aggregate-only — its
 trial-level transcripts were lost before per-run directories existed, so it
 contributes tallies only, never quotes or labels.
@@ -220,12 +220,12 @@ At these sample sizes this is an observation, not proof of safety.
 | --- | --- | --- | --- | --- | --- |
 | baseline (deterministic) | structured fields | 10/10 (1 run) | 0/8 | — | reference, not a model |
 | GPT-4.1-mini (aggregate-only) | text | 6/30 | 0/24 | unverifiable (no transcripts) | excluded from transcript analysis |
-| Muse Spark 1.3 | vision (PNG + prompt) | 6/30 | 0/24 | `off_schema_verdict` | 4 parse fallbacks; T01+T09 3/3 |
+| Muse Spark 1.3 | vision-plus-text (PNG + prompt) | 6/30 | 0/24 | `off_schema_verdict` | 4 parse fallbacks; T01+T09 3/3 |
 | GLM 5.3 Flash | text | 6/30 | 0/24 | `off_schema_verdict` | 1 parse fallback; T01+T09 3/3 |
 | Gemini 2.5 Flash (complete 8 Nov) | text | 6/30 | 0/24 | `off_schema_verdict` | T01 3/3, T09 3/3 |
 
 The finding to carry into the write-up: frontier models do not confirm fake
-receipts in 91 negative-case trials, but they do not emit the required
+receipts in 96 negative-case trials, but they do not emit the required
 verdicts either — they narrate the evidence correctly and label it
 incorrectly. Frame it as unreliable compliance with the verdict contract,
 not as proof that models catch fraud.
