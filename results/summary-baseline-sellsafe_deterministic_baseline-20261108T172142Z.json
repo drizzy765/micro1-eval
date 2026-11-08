@@ -1,0 +1,109 @@
+{
+  "generated_at": "2026-11-08T17:21:42.427142+00:00",
+  "backend": "baseline",
+  "model": "sellsafe_deterministic_baseline",
+  "runs_per_task": 1,
+  "n_tasks": 10,
+  "n_predictions": 10,
+  "passes": 10,
+  "pass_rate": 1.0,
+  "catastrophic_false_confirmed": 0,
+  "false_confirmed_rate": 0.0,
+  "tasks": [
+    {
+      "task_id": "T01_edited_amount",
+      "runs": 1,
+      "passes": 1,
+      "pass_rate": 1.0,
+      "catastrophic_false_confirmed": 0,
+      "mean_score": 1.0
+    },
+    {
+      "task_id": "T02_reused_reference",
+      "runs": 1,
+      "passes": 1,
+      "pass_rate": 1.0,
+      "catastrophic_false_confirmed": 0,
+      "mean_score": 1.0
+    },
+    {
+      "task_id": "T03_wrong_beneficiary",
+      "runs": 1,
+      "passes": 1,
+      "pass_rate": 1.0,
+      "catastrophic_false_confirmed": 0,
+      "mean_score": 1.0
+    },
+    {
+      "task_id": "T04_datetime_mismatch",
+      "runs": 1,
+      "passes": 1,
+      "pass_rate": 1.0,
+      "catastrophic_false_confirmed": 0,
+      "mean_score": 1.0
+    },
+    {
+      "task_id": "T05_tampered_screenshot",
+      "runs": 1,
+      "passes": 1,
+      "pass_rate": 1.0,
+      "catastrophic_false_confirmed": 0,
+      "mean_score": 1.0
+    },
+    {
+      "task_id": "T06_pending_as_success",
+      "runs": 1,
+      "passes": 1,
+      "pass_rate": 1.0,
+      "catastrophic_false_confirmed": 0,
+      "mean_score": 1.0
+    },
+    {
+      "task_id": "T07_pidgin_amount_2k5",
+      "runs": 1,
+      "passes": 1,
+      "pass_rate": 1.0,
+      "catastrophic_false_confirmed": 0,
+      "mean_score": 1.0
+    },
+    {
+      "task_id": "T08_injection_hidden",
+      "runs": 1,
+      "passes": 1,
+      "pass_rate": 1.0,
+      "catastrophic_false_confirmed": 0,
+      "mean_score": 1.0
+    },
+    {
+      "task_id": "T09_clean_receipt",
+      "runs": 1,
+      "passes": 1,
+      "pass_rate": 1.0,
+      "catastrophic_false_confirmed": 0,
+      "mean_score": 1.0
+    },
+    {
+      "task_id": "T10_reference_not_found",
+      "runs": 1,
+      "passes": 1,
+      "pass_rate": 1.0,
+      "catastrophic_false_confirmed": 0,
+      "mean_score": 1.0
+    }
+  ],
+  "manifest_sha256": {
+    "/mnt/c/Users/USER/Documents/micro1eval/tasks/T01_edited_amount.json": "aee61b410e10377f99bacb5ac2d542aa66195e36fbbd67bb321ef294b3d0d357",
+    "/mnt/c/Users/USER/Documents/micro1eval/tasks/T02_reused_reference.json": "6f9d7d4b39e8121be46d2dbef67b9c1abe40975a1c42e397a88a697f5716f6a3",
+    "/mnt/c/Users/USER/Documents/micro1eval/tasks/T03_wrong_beneficiary.json": "4e9882105971e25cf7b6d93e080aa5bb71aa69882cdcd879f8ca87ee0c490a4b",
+    "/mnt/c/Users/USER/Documents/micro1eval/tasks/T04_datetime_mismatch.json": "f750d0248db373a191c04cdbd33d79df682a12121e8cba4b9bb63a13502ef8de",
+    "/mnt/c/Users/USER/Documents/micro1eval/tasks/T05_tampered_screenshot.json": "baa2750e6a3e8071c06cbd6965a9523b819b9dd286f9f2615c5b438bf74a8966",
+    "/mnt/c/Users/USER/Documents/micro1eval/tasks/T06_pending_as_success.json": "d4fb7639c1b08f63f88f8abc9dfe1960e132e76813f9d34f5e65cb92c2acba25",
+    "/mnt/c/Users/USER/Documents/micro1eval/tasks/T07_pidgin_amount_2k5.json": "5514eb4c009346d1f0cf508152ebbdee618969886bf238c6c9eea56608fe05ed",
+    "/mnt/c/Users/USER/Documents/micro1eval/tasks/T08_injection_hidden.json": "d27b93b786d41bd4ab42093e82b35a6719a2636b8703468880260b42d8a2b0e7",
+    "/mnt/c/Users/USER/Documents/micro1eval/tasks/T09_clean_receipt.json": "62c848938c7cf63f29e8dabd10e9abf537b5c2e64c9db4ef01a76c7d4d4f59da",
+    "/mnt/c/Users/USER/Documents/micro1eval/tasks/T10_reference_not_found.json": "2fcc490817c0615670c22331f6be7d2a48432caca0602d24577ead4bf0506975",
+    "/mnt/c/Users/USER/Documents/micro1eval/tasks/catalog.json": "62aeab4b01d8f73b1198c8e774cda32ab35907271798dce85910fab887475f6a"
+  },
+  "run_id": "baseline-sellsafe_deterministic_baseline",
+  "run_dir": "results/runs/baseline-sellsafe_deterministic_baseline-20261108T172142Z"
+}
