@@ -1,0 +1,48 @@
+{
+  "task_id": "T02_reused_reference",
+  "run": 2,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "FAIL",
+    "claimed_amount_ngn": 12000,
+    "actual_amount_ngn": 12000,
+    "reference": "GTB-SESS-991120",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Reference GTB-SESS-991120 already settled a prior order (ORD-OLD-77), confirmed at 2026-10-28 09:16:00 WAT, so it cannot confirm the new sneakers payment.",
+      "Receipt timestamp (2026-11-04 18:01:44 WAT) conflicts with the bank alert timestamp for the same reference (2026-10-28 09:15:03 WAT), indicating a doctored/reused receipt.",
+      "No new inbound alert exists at Harbor MFB for 2026-11-04; the only matching bank alert is the older ORD-OLD-77 settlement.",
+      "Amount (NGN 12,000), beneficiary (Adaora Okonkwo), bank (Harbor MFB), and payer (Chinedu Balogun) match the old alert, consistent with a recycled receipt presented as a new payment."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'FAIL' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 22513,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"FAIL\",\n  \"claimed_amount_ngn\": 12000,\n  \"actual_amount_ngn\": 12000,\n  \"reference\": \"GTB-SESS-991120\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Reference GTB-SESS-991120 already settled a prior order (ORD-OLD-77), confirmed at 2026-10-28 09:16:00 WAT, so it cannot confirm the new sneakers payment.\",\n    \"Receipt timestamp (2026-11-04 18:01:44 WAT) conflicts with the bank alert timestamp for the same reference (2026-10-28 09:15:03 WAT), indicating a doctored/reused receipt.\",\n    \"No new inbound alert exists at Harbor MFB for 2026-11-04; the only matching bank alert is the older ORD-OLD-77 settlement.\",\n    \"Amount (NGN 12,000), beneficiary (Adaora Okonkwo), bank (Harbor MFB), and payer (Chinedu Balogun) match the old alert, consistent with a recycled receipt presented as a new payment.\"\n  ]\n}\n```"
+}

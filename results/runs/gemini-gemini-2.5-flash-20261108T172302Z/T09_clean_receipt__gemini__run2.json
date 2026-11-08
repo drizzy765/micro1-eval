@@ -1,0 +1,49 @@
+{
+  "task_id": "T09_clean_receipt",
+  "run": 2,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "CONFIRMED",
+    "claimed_amount_ngn": 18000,
+    "actual_amount_ngn": 18000,
+    "reference": "HB-CLEAN-6610",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "The claimed amount (NGN 18,000) matches the actual amount received in the bank alert (NGN 18,000) and the seller's expected amount.",
+      "The reference 'HB-CLEAN-6610' on the receipt matches the bank alert.",
+      "The beneficiary name 'Adaora Okonkwo' on the receipt matches the bank alert and the seller's expected beneficiary.",
+      "The beneficiary bank 'Harbor MFB' on the receipt matches the bank alert and the seller's expected bank.",
+      "The payer name 'Chinedu Balogun' on the receipt matches the bank alert.",
+      "The status 'SUCCESS' on the receipt matches the bank alert.",
+      "The timestamp on the receipt (2026-11-05 15:02:10 WAT) is within two minutes of the bank alert timestamp (2026-11-05 15:02:08 WAT)."
+    ]
+  },
+  "grade": {
+    "passed": true,
+    "score": 1.0,
+    "verdict_match": true,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": []
+  },
+  "elapsed_ms": 0,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"CONFIRMED\",\n  \"claimed_amount_ngn\": 18000,\n  \"actual_amount_ngn\": 18000,\n  \"reference\": \"HB-CLEAN-6610\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"The claimed amount (NGN 18,000) matches the actual amount received in the bank alert (NGN 18,000) and the seller's expected amount.\",\n    \"The reference 'HB-CLEAN-6610' on the receipt matches the bank alert.\",\n    \"The beneficiary name 'Adaora Okonkwo' on the receipt matches the bank alert and the seller's expected beneficiary.\",\n    \"The beneficiary bank 'Harbor MFB' on the receipt matches the bank alert and the seller's expected bank.\",\n    \"The payer name 'Chinedu Balogun' on the receipt matches the bank alert.\",\n    \"The status 'SUCCESS' on the receipt matches the bank alert.\",\n    \"The timestamp on the receipt (2026-11-05 15:02:10 WAT) is within two minutes of the bank alert timestamp (2026-11-05 15:02:08 WAT).\"\n  ]\n}\n```"
+}

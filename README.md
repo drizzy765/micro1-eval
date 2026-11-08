@@ -30,7 +30,7 @@ python -m generator.write_assets
 python -m runner.run --backend baseline --runs 1
 ```
 
-You should see `11 passed` from pytest and a baseline summary with `"passes": 10`, `"catastrophic_false_confirmed": 0`.
+You should see `19 passed` from pytest and a baseline summary with `"passes": 10`, `"catastrophic_false_confirmed": 0`.
 
 To run a live model (needs `OPENROUTER_API_KEY` in a local `.env`, never committed):
 
@@ -41,7 +41,7 @@ Copy-Item .env.example .env
 .\venv\Scripts\python.exe -m runner.run --backend openrouter --model openai/gpt-4.1-mini --runs 3
 ```
 
-Free OpenRouter models are fine while building. The submission run covers GPT-4.1-mini (OpenRouter, text), Muse Spark (direct, vision), GLM 5.3 Flash (OpenRouter, text), and Gemini 2.5 Flash (direct, text), 3 runs per task. (Claude was dropped 7 Nov — OpenRouter credits unaffordable.)
+Free OpenRouter models are fine while building. The submission run covers GPT-4.1-mini (OpenRouter, text), Muse Spark (direct, vision-plus-text), GLM 5.3 Flash (OpenRouter, text), and Gemini 2.5 Flash (direct, text), 3 runs per task. (Claude was dropped 7 Nov — OpenRouter credits unaffordable.)
 
 ## What "good" looks like to the judges
 
@@ -58,7 +58,7 @@ but none complied with the required verdict contract either:
 | --- | --- | --- | --- |
 | Baseline (deterministic rules) | structured fields | 10/10 | 0/8 |
 | GPT-4.1-mini (aggregate-only) | text | 6/30 | 0/24 |
-| Muse Spark 1.3 (vision: PNG + prompt) | image | 6/30 | 0/24 |
+| Muse Spark 1.3 (vision-plus-text: PNG + prompt) | image + text | 6/30 | 0/24 |
 | GLM 5.3 Flash (text) | text | 6/30 | 0/24 |
 | Gemini 2.5 Flash (text) | text | 6/30 | 0/24 |
 

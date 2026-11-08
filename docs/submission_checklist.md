@@ -29,6 +29,7 @@ Deadline: **8 November 2026, 9:15 PM PST**. Target send: **7 November**.
 - `assets/` PNGs (small)
 - `requirements.txt`, `Makefile`, `make.ps1`, `.env.example`, `.gitignore`
 - `results/latest_summary.json` and the public report tables
+- Trial transcripts: `results/transcripts/` + `results/runs/` trial JSONs (screened: no keys, no PII; GPT stays aggregate-only, no reconstructed outputs)
 - `skills/` if it still fits comfortably
 
 ## ZIP contents (exclude)
@@ -57,9 +58,9 @@ Confirm the ZIP is under 50 MB (`Length` < 52428800).
 
 ## Quality bar before you click submit
 
-- [ ] `python -m pytest -q` → 11 passed
+- [ ] `python -m pytest -q` → 19 passed
 - [ ] Baseline: 10/10, 0 false CONFIRMED
-- [ ] Frontier runs exist: GPT, Muse, GLM, 3 trials each (+ Gemini partial); Claude dropped 7 Nov (cost)
+- [ ] Frontier runs exist: GPT, Muse, GLM, Gemini, 3 trials each, all complete; Claude dropped 7 Nov (cost)
 - [ ] `docs/failure_taxonomy.md` filled from transcripts, not from memory
 - [ ] README quotes the headline false-CONFIRMED rates
 - [ ] Video follows `docs/video_script.md` and is watchable without a login wall

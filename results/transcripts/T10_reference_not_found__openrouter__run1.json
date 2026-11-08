@@ -1,0 +1,47 @@
+{
+  "task_id": "T10_reference_not_found",
+  "run": 1,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "REJECTED",
+    "claimed_amount_ngn": 11000,
+    "actual_amount_ngn": 0,
+    "reference": "GTB-GHOST-4040",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "No bank alert exists with reference GTB-GHOST-4040; the printed reference cannot be matched to any actual credit.",
+      "The only alert on record is an unrelated NGN 3,500 credit from Funke Adeyemi at 09:00 WAT, which does not match the claimed amount, payer, or reference.",
+      "Receipt displays SUCCESS and NGN 11,000, but with no corroborating bank evidence the payment cannot be confirmed; Adaora Okonkwo remains owed NGN 11,000."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'REJECTED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 23380,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"REJECTED\",\n  \"claimed_amount_ngn\": 11000,\n  \"actual_amount_ngn\": 0,\n  \"reference\": \"GTB-GHOST-4040\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"No bank alert exists with reference GTB-GHOST-4040; the printed reference cannot be matched to any actual credit.\",\n    \"The only alert on record is an unrelated NGN 3,500 credit from Funke Adeyemi at 09:00 WAT, which does not match the claimed amount, payer, or reference.\",\n    \"Receipt displays SUCCESS and NGN 11,000, but with no corroborating bank evidence the payment cannot be confirmed; Adaora Okonkwo remains owed NGN 11,000.\"\n  ]\n}\n```"
+}

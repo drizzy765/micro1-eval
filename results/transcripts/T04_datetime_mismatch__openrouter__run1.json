@@ -1,0 +1,47 @@
+{
+  "task_id": "T04_datetime_mismatch",
+  "run": 1,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "REJECTED",
+    "claimed_amount_ngn": 15000,
+    "actual_amount_ngn": 15000,
+    "reference": "HB-330145-WIG",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Timestamp mismatch: receipt claims 2026-11-05 08:40:00 WAT, but the bank alert for the same reference HB-330145-WIG was posted on 2026-09-12 19:03:11 WAT.",
+      "The receipt date appears to have been edited to make an old 12 September 2026 payment look like it was made today (2026-11-05).",
+      "Amount, reference, beneficiary, bank, and payer match the bank alert, so the underlying payment is real but predates the claimed date and cannot count as today's payment for the wig."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'REJECTED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 22378,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"REJECTED\",\n  \"claimed_amount_ngn\": 15000,\n  \"actual_amount_ngn\": 15000,\n  \"reference\": \"HB-330145-WIG\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Timestamp mismatch: receipt claims 2026-11-05 08:40:00 WAT, but the bank alert for the same reference HB-330145-WIG was posted on 2026-09-12 19:03:11 WAT.\",\n    \"The receipt date appears to have been edited to make an old 12 September 2026 payment look like it was made today (2026-11-05).\",\n    \"Amount, reference, beneficiary, bank, and payer match the bank alert, so the underlying payment is real but predates the claimed date and cannot count as today's payment for the wig.\"\n  ]\n}\n```"
+}

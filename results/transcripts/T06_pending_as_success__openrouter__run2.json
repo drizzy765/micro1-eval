@@ -1,0 +1,47 @@
+{
+  "task_id": "T06_pending_as_success",
+  "run": 2,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "NOT_CONFIRMED",
+    "claimed_amount_ngn": 7200,
+    "actual_amount_ngn": 0,
+    "reference": "GTB-PEND-5519",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "PENDING",
+    "reasons": [
+      "Receipt status is PENDING, which means the transfer was only submitted and has not been completed.",
+      "Bank evidence confirms the same reference GTB-PEND-5519 is still PENDING with no credit landed.",
+      "No funds have been received, so the NGN 7,200 owed to Adaora Okonkwo cannot be confirmed as paid."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.3429,
+    "verdict_match": false,
+    "fields_matched": 6,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": false,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'NOT_CONFIRMED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 19307,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"NOT_CONFIRMED\",\n  \"claimed_amount_ngn\": 7200,\n  \"actual_amount_ngn\": 0,\n  \"reference\": \"GTB-PEND-5519\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"PENDING\",\n  \"reasons\": [\n    \"Receipt status is PENDING, which means the transfer was only submitted and has not been completed.\",\n    \"Bank evidence confirms the same reference GTB-PEND-5519 is still PENDING with no credit landed.\",\n    \"No funds have been received, so the NGN 7,200 owed to Adaora Okonkwo cannot be confirmed as paid.\"\n  ]\n}\n```"
+}

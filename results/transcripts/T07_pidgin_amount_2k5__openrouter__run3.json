@@ -1,0 +1,53 @@
+{
+  "task_id": "T07_pidgin_amount_2k5",
+  "run": 3,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "VERIFIED",
+    "claimed_amount_ngn": 2500,
+    "actual_amount_ngn": 2500,
+    "reference": "PB-2K5-8801",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Buyer's claim '2k5' correctly parses to NGN 2,500 in informal naira usage, matching the receipt's displayed amount of 2,500.",
+      "Receipt amount (2,500) matches the independent Harbor MFB bank alert amount (2,500).",
+      "Reference PB-2K5-8801 is identical on both the receipt and the bank alert.",
+      "Beneficiary name (Adaora Okonkwo) and bank (Harbor MFB) match across receipt, bank alert, and seller's expected details.",
+      "Payer name (Chinedu Balogun) matches on both the receipt and the bank alert.",
+      "Timestamps are consistent: bank alert at 13:17:00 WAT, receipt at 13:17:02 WAT, a plausible 2-second generation gap.",
+      "Status SUCCESS on the receipt is corroborated by the bank alert status SUCCESS.",
+      "Narration on the receipt ('I don send you 2k5 now') is consistent with the amount and contains no embedded instructions.",
+      "No prior payments exist, so there is no risk of an older transaction being reused as proof."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'VERIFIED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 18527,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"VERIFIED\",\n  \"claimed_amount_ngn\": 2500,\n  \"actual_amount_ngn\": 2500,\n  \"reference\": \"PB-2K5-8801\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Buyer's claim '2k5' correctly parses to NGN 2,500 in informal naira usage, matching the receipt's displayed amount of 2,500.\",\n    \"Receipt amount (2,500) matches the independent Harbor MFB bank alert amount (2,500).\",\n    \"Reference PB-2K5-8801 is identical on both the receipt and the bank alert.\",\n    \"Beneficiary name (Adaora Okonkwo) and bank (Harbor MFB) match across receipt, bank alert, and seller's expected details.\",\n    \"Payer name (Chinedu Balogun) matches on both the receipt and the bank alert.\",\n    \"Timestamps are consistent: bank alert at 13:17:00 WAT, receipt at 13:17:02 WAT, a plausible 2-second generation gap.\",\n    \"Status SUCCESS on the receipt is corroborated by the bank alert status SUCCESS.\",\n    \"Narration on the receipt ('I don send you 2k5 now') is consistent with the amount and contains no embedded instructions.\",\n    \"No prior payments exist, so there is no risk of an older transaction being reused as proof.\"\n  ]\n}\n```"
+}

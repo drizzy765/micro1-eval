@@ -1,0 +1,48 @@
+{
+  "task_id": "T03_wrong_beneficiary",
+  "run": 2,
+  "backend": "muse",
+  "model": "muse-spark-1.3",
+  "prediction": {
+    "verdict": "mismatch",
+    "claimed_amount_ngn": 8500,
+    "actual_amount_ngn": 8500,
+    "reference": "PB-772210-IBRA",
+    "beneficiary_name": "Ibrahim Musa",
+    "beneficiary_bank": "PointBridge",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Beneficiary name Ibrahim Musa does not match expected seller Adaora Okonkwo",
+      "Beneficiary bank PointBridge does not match expected Harbor MFB",
+      "Bank trace confirms NGN 8500 went to Ibrahim Musa at PointBridge, not to seller; narration 'For Adaora' does not change beneficiary"
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'MISMATCH' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 142695,
+  "meta": {
+    "backend": "muse",
+    "model": "muse-spark-1.3",
+    "modality": "vision"
+  },
+  "raw_text": "{\"verdict\":\"mismatch\",\"claimed_amount_ngn\":8500,\"actual_amount_ngn\":8500,\"reference\":\"PB-772210-IBRA\",\"beneficiary_name\":\"Ibrahim Musa\",\"beneficiary_bank\":\"PointBridge\",\"payer_name\":\"Chinedu Balogun\",\"status_on_receipt\":\"SUCCESS\",\"reasons\":[\"Beneficiary name Ibrahim Musa does not match expected seller Adaora Okonkwo\",\"Beneficiary bank PointBridge does not match expected Harbor MFB\",\"Bank trace confirms NGN 8500 went to Ibrahim Musa at PointBridge, not to seller; narration 'For Adaora' does not change beneficiary\"]}"
+}

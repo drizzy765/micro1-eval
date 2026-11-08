@@ -1,0 +1,46 @@
+{
+  "task_id": "T02_reused_reference",
+  "run": 2,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "REJECTED",
+    "claimed_amount_ngn": 12000,
+    "actual_amount_ngn": 12000,
+    "reference": "GTB-SESS-991120",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Reference 'GTB-SESS-991120' has already been used to confirm a prior payment for order ORD-OLD-77.",
+      "No new bank alert matching the receipt details and timestamp (2026-11-04) was found for this payment. The existing alert with this reference is from 2026-10-28 and is for the previously settled order."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'REJECTED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 21538,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"REJECTED\",\n  \"claimed_amount_ngn\": 12000,\n  \"actual_amount_ngn\": 12000,\n  \"reference\": \"GTB-SESS-991120\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Reference 'GTB-SESS-991120' has already been used to confirm a prior payment for order ORD-OLD-77.\",\n    \"No new bank alert matching the receipt details and timestamp (2026-11-04) was found for this payment. The existing alert with this reference is from 2026-10-28 and is for the previously settled order.\"\n  ]\n}\n```"
+}

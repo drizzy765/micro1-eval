@@ -1,0 +1,42 @@
+{
+  "task_id": "T03_wrong_beneficiary",
+  "run": 1,
+  "backend": "baseline",
+  "model": "sellsafe_deterministic_baseline",
+  "prediction": {
+    "verdict": "SUSPICIOUS",
+    "claimed_amount_ngn": 8500,
+    "actual_amount_ngn": 8500,
+    "reference": "PB-772210-IBRA",
+    "beneficiary_name": "Ibrahim Musa",
+    "beneficiary_bank": "PointBridge",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "wrong_beneficiary"
+    ]
+  },
+  "grade": {
+    "passed": true,
+    "score": 1.0,
+    "verdict_match": true,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": []
+  },
+  "elapsed_ms": 0,
+  "meta": {
+    "backend": "baseline"
+  },
+  "raw_text": "{\"verdict\": \"SUSPICIOUS\", \"claimed_amount_ngn\": 8500, \"actual_amount_ngn\": 8500, \"reference\": \"PB-772210-IBRA\", \"beneficiary_name\": \"Ibrahim Musa\", \"beneficiary_bank\": \"PointBridge\", \"payer_name\": \"Chinedu Balogun\", \"status_on_receipt\": \"SUCCESS\", \"reasons\": [\"wrong_beneficiary\"]}"
+}

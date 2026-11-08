@@ -1,0 +1,46 @@
+{
+  "task_id": "T04_datetime_mismatch",
+  "run": 3,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "FRAUDULENT",
+    "claimed_amount_ngn": 15000,
+    "actual_amount_ngn": 15000,
+    "reference": "HB-330145-WIG",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "The timestamp on the receipt (2026-11-05 08:40:00 WAT) does not match the timestamp on the bank alert (2026-09-12 19:03:11 WAT) for the same transaction. The receipt claims a payment was made today, but the actual bank record shows it was made on 2026-09-12.",
+      "The receipt appears to have been digitally altered to change the transaction date."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'FRAUDULENT' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 21114,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"FRAUDULENT\",\n  \"claimed_amount_ngn\": 15000,\n  \"actual_amount_ngn\": 15000,\n  \"reference\": \"HB-330145-WIG\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"The timestamp on the receipt (2026-11-05 08:40:00 WAT) does not match the timestamp on the bank alert (2026-09-12 19:03:11 WAT) for the same transaction. The receipt claims a payment was made today, but the actual bank record shows it was made on 2026-09-12.\",\n    \"The receipt appears to have been digitally altered to change the transaction date.\"\n  ]\n}\n```"
+}

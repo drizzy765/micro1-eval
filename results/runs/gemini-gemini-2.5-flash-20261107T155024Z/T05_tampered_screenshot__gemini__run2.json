@@ -1,0 +1,47 @@
+{
+  "task_id": "T05_tampered_screenshot",
+  "run": 2,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "REJECTED",
+    "claimed_amount_ngn": 20000,
+    "actual_amount_ngn": 0,
+    "reference": "HP-TAMPER-0007",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "No matching bank alert found for the provided reference 'HP-TAMPER-0007'.",
+      "The amount digits on the receipt show a font mismatch, indicating potential tampering.",
+      "A crop artifact is visible under the reference row on the receipt, suggesting image manipulation."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'REJECTED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 18945,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"REJECTED\",\n  \"claimed_amount_ngn\": 20000,\n  \"actual_amount_ngn\": 0,\n  \"reference\": \"HP-TAMPER-0007\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"No matching bank alert found for the provided reference 'HP-TAMPER-0007'.\",\n    \"The amount digits on the receipt show a font mismatch, indicating potential tampering.\",\n    \"A crop artifact is visible under the reference row on the receipt, suggesting image manipulation.\"\n  ]\n}\n```"
+}

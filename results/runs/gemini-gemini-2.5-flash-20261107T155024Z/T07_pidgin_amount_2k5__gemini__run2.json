@@ -1,0 +1,49 @@
+{
+  "task_id": "T07_pidgin_amount_2k5",
+  "run": 2,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "legitimate",
+    "claimed_amount_ngn": 2500,
+    "actual_amount_ngn": 2500,
+    "reference": "PB-2K5-8801",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "The claimed amount (2k5 = 2,500 NGN) on the receipt and in the buyer's narration matches the actual amount received in the bank alert.",
+      "The reference number 'PB-2K5-8801' on the receipt matches the bank alert.",
+      "The beneficiary name 'Adaora Okonkwo' and bank 'Harbor MFB' on the receipt match the bank alert and seller's expected details.",
+      "The payer name 'Chinedu Balogun' on the receipt matches the bank alert.",
+      "The status 'SUCCESS' on the receipt is confirmed by the bank alert."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'LEGITIMATE' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 20468,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"legitimate\",\n  \"claimed_amount_ngn\": 2500,\n  \"actual_amount_ngn\": 2500,\n  \"reference\": \"PB-2K5-8801\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"The claimed amount (2k5 = 2,500 NGN) on the receipt and in the buyer's narration matches the actual amount received in the bank alert.\",\n    \"The reference number 'PB-2K5-8801' on the receipt matches the bank alert.\",\n    \"The beneficiary name 'Adaora Okonkwo' and bank 'Harbor MFB' on the receipt match the bank alert and seller's expected details.\",\n    \"The payer name 'Chinedu Balogun' on the receipt matches the bank alert.\",\n    \"The status 'SUCCESS' on the receipt is confirmed by the bank alert.\"\n  ]\n}\n```"
+}

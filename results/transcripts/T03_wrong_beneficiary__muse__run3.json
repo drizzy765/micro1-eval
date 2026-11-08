@@ -1,0 +1,36 @@
+{
+  "task_id": "T03_wrong_beneficiary",
+  "run": 3,
+  "backend": "muse",
+  "model": "muse-spark-1.3",
+  "prediction": {
+    "verdict": "UNVERIFIED",
+    "parse_error": true,
+    "raw": "{\"verdict\":\"mismatch\",\"claimed_amount_ngn\":8500,\"actual_amount_ngn\":8500,\"reference\":\"PB-772210-IBRA\",\"beneficiary_name\":\"Ibrahim Musa\",\"beneficiary_bank\":\"PointBridge\",\"payer_name\":\"Chinedu Balogun\",\"status_on_receipt\":\"SUCCESS\",\"reasons\":[\"Beneficiary name mismatch: receipt shows 'Ibrahim Musa' but expected seller is 'Adaora Okonkwo'\",\"Beneficiary bank mismatch: receipt shows 'PointBridge'"
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.0,
+    "verdict_match": false,
+    "fields_matched": 0,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": false,
+      "actual_amount_ngn": false,
+      "reference": false,
+      "beneficiary_name": false,
+      "beneficiary_bank": false,
+      "payer_name": false,
+      "status_on_receipt": false
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": []
+  },
+  "elapsed_ms": 27808,
+  "meta": {
+    "backend": "muse",
+    "model": "muse-spark-1.3",
+    "modality": "vision"
+  },
+  "raw_text": "{\"verdict\":\"mismatch\",\"claimed_amount_ngn\":8500,\"actual_amount_ngn\":8500,\"reference\":\"PB-772210-IBRA\",\"beneficiary_name\":\"Ibrahim Musa\",\"beneficiary_bank\":\"PointBridge\",\"payer_name\":\"Chinedu Balogun\",\"status_on_receipt\":\"SUCCESS\",\"reasons\":[\"Beneficiary name mismatch: receipt shows 'Ibrahim Musa' but expected seller is 'Adaora Okonkwo'\",\"Beneficiary bank mismatch: receipt shows 'PointBridge'"
+}

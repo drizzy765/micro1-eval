@@ -1,0 +1,46 @@
+{
+  "task_id": "T06_pending_as_success",
+  "run": 1,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "DECLINED",
+    "claimed_amount_ngn": 7200,
+    "actual_amount_ngn": 0,
+    "reference": "GTB-PEND-5519",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "PENDING",
+    "reasons": [
+      "The transfer status on the receipt is 'PENDING'.",
+      "Bank evidence confirms the transfer is 'PENDING' and no credit has been received by the beneficiary."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.3429,
+    "verdict_match": false,
+    "fields_matched": 6,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": false,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'DECLINED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 19072,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"DECLINED\",\n  \"claimed_amount_ngn\": 7200,\n  \"actual_amount_ngn\": 0,\n  \"reference\": \"GTB-PEND-5519\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"PENDING\",\n  \"reasons\": [\n    \"The transfer status on the receipt is 'PENDING'.\",\n    \"Bank evidence confirms the transfer is 'PENDING' and no credit has been received by the beneficiary.\"\n  ]\n}\n```"
+}

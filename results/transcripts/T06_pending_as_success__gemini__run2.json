@@ -1,0 +1,47 @@
+{
+  "task_id": "T06_pending_as_success",
+  "run": 2,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "REJECTED",
+    "claimed_amount_ngn": 7200,
+    "actual_amount_ngn": 0,
+    "reference": "GTB-PEND-5519",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "PENDING",
+    "reasons": [
+      "Transfer status is PENDING on the receipt.",
+      "Bank alerts also show the transfer as PENDING.",
+      "No credit has landed in the beneficiary's account."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.3429,
+    "verdict_match": false,
+    "fields_matched": 6,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": false,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'REJECTED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 19785,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"REJECTED\",\n  \"claimed_amount_ngn\": 7200,\n  \"actual_amount_ngn\": 0,\n  \"reference\": \"GTB-PEND-5519\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"PENDING\",\n  \"reasons\": [\n    \"Transfer status is PENDING on the receipt.\",\n    \"Bank alerts also show the transfer as PENDING.\",\n    \"No credit has landed in the beneficiary's account.\"\n  ]\n}\n```"
+}

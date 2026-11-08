@@ -1,0 +1,48 @@
+{
+  "task_id": "T02_reused_reference",
+  "run": 3,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "REJECTED",
+    "claimed_amount_ngn": 12000,
+    "actual_amount_ngn": 12000,
+    "reference": "GTB-SESS-991120",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Reference GTB-SESS-991120 already settled prior order ORD-OLD-77 on 2026-10-28 and cannot confirm a new order.",
+      "Receipt timestamp 2026-11-04 18:01:44 WAT does not match the bank alert timestamp 2026-10-28 09:15:03 WAT, indicating a doctored/reused receipt.",
+      "No new inbound bank alert exists for 2026-11-04; the only matching alert is the one already tied to ORD-OLD-77.",
+      "Amount, beneficiary name, and bank match the seller's expectations, but the payment is not new."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'REJECTED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 19856,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"REJECTED\",\n  \"claimed_amount_ngn\": 12000,\n  \"actual_amount_ngn\": 12000,\n  \"reference\": \"GTB-SESS-991120\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Reference GTB-SESS-991120 already settled prior order ORD-OLD-77 on 2026-10-28 and cannot confirm a new order.\",\n    \"Receipt timestamp 2026-11-04 18:01:44 WAT does not match the bank alert timestamp 2026-10-28 09:15:03 WAT, indicating a doctored/reused receipt.\",\n    \"No new inbound bank alert exists for 2026-11-04; the only matching alert is the one already tied to ORD-OLD-77.\",\n    \"Amount, beneficiary name, and bank match the seller's expectations, but the payment is not new.\"\n  ]\n}\n```"
+}

@@ -1,0 +1,49 @@
+{
+  "task_id": "T09_clean_receipt",
+  "run": 1,
+  "backend": "muse",
+  "model": "muse-spark-1.3",
+  "prediction": {
+    "verdict": "confirmed",
+    "claimed_amount_ngn": 18000,
+    "actual_amount_ngn": 18000,
+    "reference": "HB-CLEAN-6610",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Amount matches bank alert (18000 NGN)",
+      "Reference matches bank alert (HB-CLEAN-6610)",
+      "Beneficiary name and bank match seller expected and bank alert",
+      "Payer name matches bank alert (Chinedu Balogun)",
+      "Status SUCCESS on both receipt and bank alert",
+      "Timestamp within two minutes (2 seconds difference)"
+    ]
+  },
+  "grade": {
+    "passed": true,
+    "score": 1.0,
+    "verdict_match": true,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": []
+  },
+  "elapsed_ms": 24199,
+  "meta": {
+    "backend": "muse",
+    "model": "muse-spark-1.3",
+    "modality": "vision"
+  },
+  "raw_text": "{\"verdict\":\"confirmed\",\"claimed_amount_ngn\":18000,\"actual_amount_ngn\":18000,\"reference\":\"HB-CLEAN-6610\",\"beneficiary_name\":\"Adaora Okonkwo\",\"beneficiary_bank\":\"Harbor MFB\",\"payer_name\":\"Chinedu Balogun\",\"status_on_receipt\":\"SUCCESS\",\"reasons\":[\"Amount matches bank alert (18000 NGN)\",\"Reference matches bank alert (HB-CLEAN-6610)\",\"Beneficiary name and bank match seller expected and bank alert\",\"Payer name matches bank alert (Chinedu Balogun)\",\"Status SUCCESS on both receipt and bank alert\",\"Timestamp within two minutes (2 seconds difference)\"]}"
+}

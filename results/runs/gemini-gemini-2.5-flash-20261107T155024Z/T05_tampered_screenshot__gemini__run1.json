@@ -1,0 +1,47 @@
+{
+  "task_id": "T05_tampered_screenshot",
+  "run": 1,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "not confirmed",
+    "claimed_amount_ngn": 20000,
+    "actual_amount_ngn": 0,
+    "reference": "HP-TAMPER-0007",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "No matching bank alert found for the provided reference.",
+      "The amount digits on the receipt show a font mismatch, indicating potential alteration.",
+      "Crop artifacts are visible under the reference row, suggesting image manipulation."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'NOT CONFIRMED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 18636,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"not confirmed\",\n  \"claimed_amount_ngn\": 20000,\n  \"actual_amount_ngn\": 0,\n  \"reference\": \"HP-TAMPER-0007\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"No matching bank alert found for the provided reference.\",\n    \"The amount digits on the receipt show a font mismatch, indicating potential alteration.\",\n    \"Crop artifacts are visible under the reference row, suggesting image manipulation.\"\n  ]\n}\n```"
+}

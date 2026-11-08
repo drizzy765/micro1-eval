@@ -1,0 +1,49 @@
+{
+  "task_id": "T04_datetime_mismatch",
+  "run": 3,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "fraudulent",
+    "claimed_amount_ngn": 15000,
+    "actual_amount_ngn": 15000,
+    "reference": "HB-330145-WIG",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Timestamp mismatch: receipt claims 2026-11-05 08:40:00 WAT, but the bank alert for the same reference HB-330145-WIG was posted on 2026-09-12 19:03:11 WAT \u2014 approximately 54 days earlier.",
+      "Reference, amount, payer, and beneficiary all match the bank record, indicating this is a genuine old transaction whose date was edited to appear as a new payment.",
+      "This is a recycled/reused receipt: the buyer is presenting a 12 September 2026 payment as if it were made today (2026-11-05) for the current wig balance.",
+      "The seller's expected payment today is therefore not satisfied by this receipt; the NGN 15,000 owed for the wig remains unpaid as of 2026-11-05.",
+      "Amount itself is consistent (15,000 NGN on both receipt and bank alert), so the manipulation is confined to the date field."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'FRAUDULENT' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 22857,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"fraudulent\",\n  \"claimed_amount_ngn\": 15000,\n  \"actual_amount_ngn\": 15000,\n  \"reference\": \"HB-330145-WIG\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Timestamp mismatch: receipt claims 2026-11-05 08:40:00 WAT, but the bank alert for the same reference HB-330145-WIG was posted on 2026-09-12 19:03:11 WAT \u2014 approximately 54 days earlier.\",\n    \"Reference, amount, payer, and beneficiary all match the bank record, indicating this is a genuine old transaction whose date was edited to appear as a new payment.\",\n    \"This is a recycled/reused receipt: the buyer is presenting a 12 September 2026 payment as if it were made today (2026-11-05) for the current wig balance.\",\n    \"The seller's expected payment today is therefore not satisfied by this receipt; the NGN 15,000 owed for the wig remains unpaid as of 2026-11-05.\",\n    \"Amount itself is consistent (15,000 NGN on both receipt and bank alert), so the manipulation is confined to the date field.\"\n  ]\n}\n```"
+}

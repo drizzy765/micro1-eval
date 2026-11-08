@@ -42,16 +42,16 @@
 
 ## Task 3: Resolve Groq/Llama scope and `results/runs/` gitignore
 
-**Description:** Decide the Groq/Llama arm fate and stop untracked run dirs from polluting `git status`.
+**Description:** Decide the Groq/Llama arm fate and stop untracked run dirs from polluting `git status`. Superseded 8 Nov (packaging pass): trial transcripts are now tracked public evidence.
 
 **Acceptance criteria:**
 - [x] Either Groq key fixed with one passing probe, or arm explicitly dropped and noted in `reports/eval-report.md` limitations
-- [x] `.gitignore` decision recorded: `results/runs/` ignored or committed
-- [x] `git status --short` no longer shows surprise untracked run dirs
+- [x] `.gitignore` decision recorded: `results/runs/` + `results/transcripts/` tracked (screened: no keys, no PII; 8 Nov packaging pass)
+- [x] Trial transcripts committed: Muse/GLM/Gemini records in `results/transcripts/` + `results/runs/`
 
 **Verification:**
-- [x] Tests pass: `python -m pytest -q` (14 passed, 8 Nov)
-- [x] Manual check: `git status --short` clean of run dirs (runs/ + transcripts/ gitignored; 8 Nov confirmed)
+- [x] Tests pass: `python -m pytest -q` (19 passed, 8 Nov)
+- [x] Manual check: staged transcript set complete (143 trial JSONs), secret/PII screen clean
 
 **Dependencies:** None
 
@@ -65,7 +65,7 @@
 ## Checkpoint: Frontier runs
 
 - [x] All attempted arms have timestamped summaries plus unique run dirs (Gemini completed 8 Nov: 4 full arms × 30 + baseline)
-- [x] `python -m pytest -q` green (expect 14 passed incl. `tests/test_run_dirs.py`)
+- [x] `python -m pytest -q` green (19 passed incl. `tests/test_run_dirs.py` + `tests/test_diagnostic.py`)
 - [x] Baseline still 10/10, 0 false CONFIRMED
 - [ ] Review with human before building ZIP
 

@@ -1,0 +1,47 @@
+{
+  "task_id": "T02_reused_reference",
+  "run": 3,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "REJECTED",
+    "claimed_amount_ngn": 12000,
+    "actual_amount_ngn": 12000,
+    "reference": "GTB-SESS-991120",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "The reference 'GTB-SESS-991120' has already been used to confirm a payment for a prior order (ORD-OLD-77) on 2026-10-28. A new payment requires a unique, unconfirmed reference.",
+      "The bank alert for reference 'GTB-SESS-991120' is dated 2026-10-28, which does not match the receipt's claimed timestamp of 2026-11-04.",
+      "No new bank alert corresponding to the receipt's date (2026-11-04) and amount for this beneficiary was found."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'REJECTED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 22162,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"REJECTED\",\n  \"claimed_amount_ngn\": 12000,\n  \"actual_amount_ngn\": 12000,\n  \"reference\": \"GTB-SESS-991120\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"The reference 'GTB-SESS-991120' has already been used to confirm a payment for a prior order (ORD-OLD-77) on 2026-10-28. A new payment requires a unique, unconfirmed reference.\",\n    \"The bank alert for reference 'GTB-SESS-991120' is dated 2026-10-28, which does not match the receipt's claimed timestamp of 2026-11-04.\",\n    \"No new bank alert corresponding to the receipt's date (2026-11-04) and amount for this beneficiary was found.\"\n  ]\n}\n```"
+}

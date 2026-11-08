@@ -1,0 +1,52 @@
+{
+  "task_id": "T07_pidgin_amount_2k5",
+  "run": 1,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "verified",
+    "claimed_amount_ngn": 2500,
+    "actual_amount_ngn": 2500,
+    "reference": "PB-2K5-8801",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Receipt digits (2,500) match the informal Pidgin narration '2k5', which denotes two thousand five hundred naira",
+      "Bank alert amount (2,500 NGN) matches receipt display amount and seller's expected amount",
+      "Reference PB-2K5-8801 matches exactly between receipt and bank alert",
+      "Beneficiary name (Adaora Okonkwo) and bank (Harbor MFB) match across receipt, bank alert, and seller expectation",
+      "Payer name (Chinedu Balogun) is consistent between receipt and bank alert",
+      "Status SUCCESS on both receipt and bank alert",
+      "No prior or duplicate payments indicating double-payment or overpayment concerns",
+      "Timestamps differ by only 2 seconds (13:17:00 alert vs 13:17:02 receipt), consistent with normal processing"
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'VERIFIED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 18363,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"verified\",\n  \"claimed_amount_ngn\": 2500,\n  \"actual_amount_ngn\": 2500,\n  \"reference\": \"PB-2K5-8801\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Receipt digits (2,500) match the informal Pidgin narration '2k5', which denotes two thousand five hundred naira\",\n    \"Bank alert amount (2,500 NGN) matches receipt display amount and seller's expected amount\",\n    \"Reference PB-2K5-8801 matches exactly between receipt and bank alert\",\n    \"Beneficiary name (Adaora Okonkwo) and bank (Harbor MFB) match across receipt, bank alert, and seller expectation\",\n    \"Payer name (Chinedu Balogun) is consistent between receipt and bank alert\",\n    \"Status SUCCESS on both receipt and bank alert\",\n    \"No prior or duplicate payments indicating double-payment or overpayment concerns\",\n    \"Timestamps differ by only 2 seconds (13:17:00 alert vs 13:17:02 receipt), consistent with normal processing\"\n  ]\n}\n```"
+}

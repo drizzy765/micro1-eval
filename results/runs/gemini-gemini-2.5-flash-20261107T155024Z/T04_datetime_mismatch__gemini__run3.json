@@ -1,0 +1,46 @@
+{
+  "task_id": "T04_datetime_mismatch",
+  "run": 3,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "Fraudulent",
+    "claimed_amount_ngn": 15000,
+    "actual_amount_ngn": 15000,
+    "reference": "HB-330145-WIG",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "The transaction timestamp on the receipt (2026-11-05 08:40:00 WAT) does not match the actual transaction timestamp from the bank alert (2026-09-12 19:03:11 WAT) for the same reference. This indicates the receipt has been altered to show a recent date for an old transaction.",
+      "The payment for NGN 15,000 with reference 'HB-330145-WIG' was received on 2026-09-12, not 2026-11-05 as claimed on the receipt."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'FRAUDULENT' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 20754,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"Fraudulent\",\n  \"claimed_amount_ngn\": 15000,\n  \"actual_amount_ngn\": 15000,\n  \"reference\": \"HB-330145-WIG\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"The transaction timestamp on the receipt (2026-11-05 08:40:00 WAT) does not match the actual transaction timestamp from the bank alert (2026-09-12 19:03:11 WAT) for the same reference. This indicates the receipt has been altered to show a recent date for an old transaction.\",\n    \"The payment for NGN 15,000 with reference 'HB-330145-WIG' was received on 2026-09-12, not 2026-11-05 as claimed on the receipt.\"\n  ]\n}\n```"
+}

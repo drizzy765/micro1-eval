@@ -75,13 +75,13 @@ On screen: the summary table from `docs/failure_taxonomy.md` and `results/latest
 
 Say the real numbers (audited 6 Nov 2026 with Gemini completed 8 Nov, 120 completed model trials):
 
-> We ran GPT-4.1-mini, Muse Spark, GLM 5.3 Flash, and Gemini 2.5 Flash three times on each of ten tasks. The deterministic baseline — the same rules we use in Sell-Safe — scored ten out of ten with zero false confirms. Every frontier arm scored 6 out of 30 with zero false CONFIRMED: nobody confirmed a fake receipt. But almost nobody used the required verdicts either. Here is Muse, looking at the actual receipt image, answering "legit" on a reused reference it correctly identified as already settled. Here is GLM answering "verified" on a '2k5' amount it correctly parsed as 2,500 naira. A seller reading "legit" or "verified" releases the goods — that is the failure that matters, even though the grader scores it zero.
+> We ran GPT-4.1-mini, Muse Spark, GLM 5.3 Flash, and Gemini 2.5 Flash three times on each of ten tasks. The deterministic baseline — the same rules we use in Sell-Safe — scored ten out of ten with zero false confirms. Every frontier arm scored 6 out of 30 with zero false CONFIRMED: nobody confirmed a fake receipt. But almost nobody used the required verdicts either. On a reused reference, Muse answered "invalid" while its reasons correctly named the already-settled order. On a '2k5' amount, GLM answered "verified" where the gold is CONFIRMED — every field matched, only the label string differed. And 15 of 30 task-arms returned different verdict strings on identical retries. The failure is unreliable compliance with the verdict contract, scored zero by the strict grader.
 
 Then add one honesty beat, on screen with the limitations list:
 
-> Caveats, all published: 30 trials per arm at most, so zero false confirms is an observation, not proof of safety. GPT's trial transcripts were lost to a file-keying bug before per-run directories existed, so it contributes tallies only. Text-input and vision-input arms are compared separately because their inputs differed.
+> Caveats, all published: 30 trials per arm at most, so zero false confirms is an observation, not proof of safety. GPT's trial transcripts were lost to a file-keying bug before per-run directories existed, so it contributes tallies only. Text-input arms and the vision-plus-text arm are compared separately because their inputs differed.
 
-Do not overclaim. Say plainly that T01 and T09 pass 3/3 on every arm, and that semantic correctness beyond the strict verdict is unresolved. Disclose the confound in one sentence: only T01's prompt lists the four legal verdicts, so most wrong labels may reflect a missing answer vocabulary — but 15 of 30 task-arms also gave different verdicts on identical retries, which no vocabulary fix explains.
+Do not overclaim. Say plainly that T01 and T09 pass 3/3 on every arm, and that semantic correctness beyond the strict verdict is unresolved. Disclose the confound in one sentence: only T01's prompt lists the four legal verdicts, so most wrong labels may reflect a missing answer vocabulary — but 15 of 30 task-arms also returned different verdict strings on identical retries, which no vocabulary fix explains.
 
 ## 3:40–4:30 — How to rerun, and close
 
@@ -91,6 +91,6 @@ Say:
 
 > A judge can rerun this on a laptop with one command: install requirements, `pytest`, then `python -m runner.run --backend baseline`. Point `OPENROUTER_API_KEY` at any model to reproduce the live numbers. The SHA-256 manifest in the summary file pins the exact task suite we scored.
 
-> Fake receipts are how Instagram sellers in Nigeria lose stock. Frontier models still treat the screenshot as the source of truth more often than a six-rule engine does. That is the eval.
+> Fake receipts cost Instagram sellers in Nigeria real stock — that is why this eval exists. Our finding: a six-rule engine complies with the verdict contract ten out of ten; frontier models narrate the evidence correctly and label it inconsistently. That is the eval.
 
 Hard stop by 5:00.
