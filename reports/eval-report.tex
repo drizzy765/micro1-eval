@@ -51,22 +51,23 @@ comparison, not proof of general safety.
 
 \section{Arms}
 
-Text-input arms (GPT, GLM, Gemini) and the vision arm (Muse) had different
-inputs; compare within modality only.
+Text-input arms (GPT, GLM, Gemini) and the vision-plus-text arm (Muse) had
+different inputs; compare within modality only.
 
 \begin{table}[h]
 \centering
-\begin{tabular}{llccc}
+{\small
+\begin{tabular}{@{}p{4.4cm}p{3.4cm}ccc@{}}
 \toprule
 Arm & Input & Trials & Exact-schema pass & False CONFIRMED \\
 \midrule
 Baseline (rules) & structured fields & 10 & 10/10 & 0/8 \\
 GPT-4.1-mini, OpenRouter (aggregate-only) & text & 30 & 6/30 & 0/24 \\
-Muse Spark 1.3, direct (vision: PNG + prompt) & image & 30 & 6/30 & 0/24 \\
+Muse Spark 1.3, direct & vision-plus-text: PNG + prompt & 30 & 6/30 & 0/24 \\
 GLM 5.3 Flash, OpenRouter (text) & text & 30 & 6/30 & 0/24 \\
 Gemini 2.5 Flash, direct (completed 8 Nov) & text & 30 & 6/30 & 0/24 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Denominators for false CONFIRMED are completed negative-case trials
 (gold $\neq$ CONFIRMED). Quota errors, parse failures and timeouts are
 transport problems, never counted as answers.}
