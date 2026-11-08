@@ -1,0 +1,35 @@
+{
+  "task_id": "T04_datetime_mismatch",
+  "run": 2,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "UNVERIFIED",
+    "parse_error": true,
+    "raw": "{\n  \"verdict\": \"fraudulent\",\n  \"claimed_amount_ngn\": 15000,\n  \"actual_amount_ngn\": 15000,\n  \"reference\": \"HB-330145-WIG\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Timestamp mismatch: receipt claims 2026-11-05 08:40:00 WAT, but the bank alert for the same reference HB"
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.0,
+    "verdict_match": false,
+    "fields_matched": 0,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": false,
+      "actual_amount_ngn": false,
+      "reference": false,
+      "beneficiary_name": false,
+      "beneficiary_bank": false,
+      "payer_name": false,
+      "status_on_receipt": false
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": []
+  },
+  "elapsed_ms": 26325,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "{\n  \"verdict\": \"fraudulent\",\n  \"claimed_amount_ngn\": 15000,\n  \"actual_amount_ngn\": 15000,\n  \"reference\": \"HB-330145-WIG\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Timestamp mismatch: receipt claims 2026-11-05 08:40:00 WAT, but the bank alert for the same reference HB"
+}

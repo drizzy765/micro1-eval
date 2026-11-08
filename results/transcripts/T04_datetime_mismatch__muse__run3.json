@@ -1,0 +1,48 @@
+{
+  "task_id": "T04_datetime_mismatch",
+  "run": 3,
+  "backend": "muse",
+  "model": "muse-spark-1.3",
+  "prediction": {
+    "verdict": "fraudulent",
+    "claimed_amount_ngn": 15000,
+    "actual_amount_ngn": 15000,
+    "reference": "HB-330145-WIG",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Receipt timestamp 2026-11-05 08:40:00 WAT does not match bank alert timestamp 2026-09-12 19:03:11 WAT for same reference HB-330145-WIG",
+      "Same reference and amount exist in bank records but posted on 12 Sep 2026, not 5 Nov 2026, indicating screenshot date was edited",
+      "No payment for this reference on expected date 2026-11-05; reference appears recycled from prior payment"
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'FRAUDULENT' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 142472,
+  "meta": {
+    "backend": "muse",
+    "model": "muse-spark-1.3",
+    "modality": "vision"
+  },
+  "raw_text": "{\"verdict\":\"fraudulent\",\"claimed_amount_ngn\":15000,\"actual_amount_ngn\":15000,\"reference\":\"HB-330145-WIG\",\"beneficiary_name\":\"Adaora Okonkwo\",\"beneficiary_bank\":\"Harbor MFB\",\"payer_name\":\"Chinedu Balogun\",\"status_on_receipt\":\"SUCCESS\",\"reasons\":[\"Receipt timestamp 2026-11-05 08:40:00 WAT does not match bank alert timestamp 2026-09-12 19:03:11 WAT for same reference HB-330145-WIG\",\"Same reference and amount exist in bank records but posted on 12 Sep 2026, not 5 Nov 2026, indicating screenshot date was edited\",\"No payment for this reference on expected date 2026-11-05; reference appears recycled from prior payment\"]}"
+}

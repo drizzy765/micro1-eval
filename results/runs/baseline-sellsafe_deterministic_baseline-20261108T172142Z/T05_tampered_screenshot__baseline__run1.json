@@ -1,0 +1,44 @@
+{
+  "task_id": "T05_tampered_screenshot",
+  "run": 1,
+  "backend": "baseline",
+  "model": "sellsafe_deterministic_baseline",
+  "prediction": {
+    "verdict": "SUSPICIOUS",
+    "claimed_amount_ngn": 20000,
+    "actual_amount_ngn": 0,
+    "reference": "HP-TAMPER-0007",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "on_image_anomaly",
+      "tampered_screenshot",
+      "no_matching_alert"
+    ]
+  },
+  "grade": {
+    "passed": true,
+    "score": 1.0,
+    "verdict_match": true,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": []
+  },
+  "elapsed_ms": 0,
+  "meta": {
+    "backend": "baseline"
+  },
+  "raw_text": "{\"verdict\": \"SUSPICIOUS\", \"claimed_amount_ngn\": 20000, \"actual_amount_ngn\": 0, \"reference\": \"HP-TAMPER-0007\", \"beneficiary_name\": \"Adaora Okonkwo\", \"beneficiary_bank\": \"Harbor MFB\", \"payer_name\": \"Chinedu Balogun\", \"status_on_receipt\": \"SUCCESS\", \"reasons\": [\"on_image_anomaly\", \"tampered_screenshot\", \"no_matching_alert\"]}"
+}

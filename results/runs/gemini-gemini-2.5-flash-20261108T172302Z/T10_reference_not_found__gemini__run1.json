@@ -1,0 +1,46 @@
+{
+  "task_id": "T10_reference_not_found",
+  "run": 1,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "unconfirmed",
+    "claimed_amount_ngn": 11000,
+    "actual_amount_ngn": 0,
+    "reference": "GTB-GHOST-4040",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Transaction reference 'GTB-GHOST-4040' on the receipt does not match any reference in the provided bank alerts.",
+      "No bank alert was found for the claimed amount of NGN 11,000 from the claimed payer 'Chinedu Balogun'."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'UNCONFIRMED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 0,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"unconfirmed\",\n  \"claimed_amount_ngn\": 11000,\n  \"actual_amount_ngn\": 0,\n  \"reference\": \"GTB-GHOST-4040\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Transaction reference 'GTB-GHOST-4040' on the receipt does not match any reference in the provided bank alerts.\",\n    \"No bank alert was found for the claimed amount of NGN 11,000 from the claimed payer 'Chinedu Balogun'.\"\n  ]\n}\n```"
+}

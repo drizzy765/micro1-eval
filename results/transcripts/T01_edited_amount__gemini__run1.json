@@ -1,0 +1,44 @@
+{
+  "task_id": "T01_edited_amount",
+  "run": 1,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "SUSPICIOUS",
+    "claimed_amount_ngn": 50000,
+    "actual_amount_ngn": 5000,
+    "reference": "HP-440291-OKON",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Claimed amount (NGN 50,000) on receipt does not match actual amount (NGN 5,000) in bank evidence.",
+      "Receipt appears to be digitally altered to inflate the payment amount."
+    ]
+  },
+  "grade": {
+    "passed": true,
+    "score": 1.0,
+    "verdict_match": true,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": []
+  },
+  "elapsed_ms": 5524,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"SUSPICIOUS\",\n  \"claimed_amount_ngn\": 50000,\n  \"actual_amount_ngn\": 5000,\n  \"reference\": \"HP-440291-OKON\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Claimed amount (NGN 50,000) on receipt does not match actual amount (NGN 5,000) in bank evidence.\",\n    \"Receipt appears to be digitally altered to inflate the payment amount.\"\n  ]\n}\n```"
+}

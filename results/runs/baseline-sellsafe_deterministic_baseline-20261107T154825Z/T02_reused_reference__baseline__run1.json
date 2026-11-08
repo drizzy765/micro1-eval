@@ -1,0 +1,43 @@
+{
+  "task_id": "T02_reused_reference",
+  "run": 1,
+  "backend": "baseline",
+  "model": "sellsafe_deterministic_baseline",
+  "prediction": {
+    "verdict": "SUSPICIOUS",
+    "claimed_amount_ngn": 12000,
+    "actual_amount_ngn": 12000,
+    "reference": "GTB-SESS-991120",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "reused_reference",
+      "already_settled"
+    ]
+  },
+  "grade": {
+    "passed": true,
+    "score": 1.0,
+    "verdict_match": true,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": []
+  },
+  "elapsed_ms": 0,
+  "meta": {
+    "backend": "baseline"
+  },
+  "raw_text": "{\"verdict\": \"SUSPICIOUS\", \"claimed_amount_ngn\": 12000, \"actual_amount_ngn\": 12000, \"reference\": \"GTB-SESS-991120\", \"beneficiary_name\": \"Adaora Okonkwo\", \"beneficiary_bank\": \"Harbor MFB\", \"payer_name\": \"Chinedu Balogun\", \"status_on_receipt\": \"SUCCESS\", \"reasons\": [\"reused_reference\", \"already_settled\"]}"
+}

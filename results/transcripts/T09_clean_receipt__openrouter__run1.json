@@ -1,0 +1,49 @@
+{
+  "task_id": "T09_clean_receipt",
+  "run": 1,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "CONFIRMED",
+    "claimed_amount_ngn": 18000,
+    "actual_amount_ngn": 18000,
+    "reference": "HB-CLEAN-6610",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Receipt amount (NGN 18,000) matches bank alert amount and seller's expected amount",
+      "Reference HB-CLEAN-6610 matches on both receipt and bank alert",
+      "Beneficiary name (Adaora Okonkwo) and bank (Harbor MFB) match bank alert and seller expectation",
+      "Payer name (Chinedu Balogun) matches bank alert",
+      "Status SUCCESS on both receipt and bank alert",
+      "Timestamps differ by 2 seconds (receipt 15:02:10 vs alert 15:02:08), well within the two-minute tolerance",
+      "No suspicious instructions or anomalies detected in the receipt"
+    ]
+  },
+  "grade": {
+    "passed": true,
+    "score": 1.0,
+    "verdict_match": true,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": []
+  },
+  "elapsed_ms": 19197,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"CONFIRMED\",\n  \"claimed_amount_ngn\": 18000,\n  \"actual_amount_ngn\": 18000,\n  \"reference\": \"HB-CLEAN-6610\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Receipt amount (NGN 18,000) matches bank alert amount and seller's expected amount\",\n    \"Reference HB-CLEAN-6610 matches on both receipt and bank alert\",\n    \"Beneficiary name (Adaora Okonkwo) and bank (Harbor MFB) match bank alert and seller expectation\",\n    \"Payer name (Chinedu Balogun) matches bank alert\",\n    \"Status SUCCESS on both receipt and bank alert\",\n    \"Timestamps differ by 2 seconds (receipt 15:02:10 vs alert 15:02:08), well within the two-minute tolerance\",\n    \"No suspicious instructions or anomalies detected in the receipt\"\n  ]\n}\n```"
+}

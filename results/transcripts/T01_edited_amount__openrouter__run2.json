@@ -1,0 +1,47 @@
+{
+  "task_id": "T01_edited_amount",
+  "run": 2,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "SUSPICIOUS",
+    "claimed_amount_ngn": 50000,
+    "actual_amount_ngn": 5000,
+    "reference": "HP-440291-OKON",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Receipt displays NGN 50,000 but bank alert for the same reference shows NGN 5,000",
+      "Amount inflated 10x; consistent with a doctored screenshot",
+      "Reference, beneficiary, payer, bank, and status do match the bank alert",
+      "A real NGN 5,000 SUCCESS payment exists and matches the amount owed",
+      "Receipt cannot be confirmed as presented due to amount mismatch"
+    ]
+  },
+  "grade": {
+    "passed": true,
+    "score": 1.0,
+    "verdict_match": true,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": []
+  },
+  "elapsed_ms": 79389,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"SUSPICIOUS\",\n  \"claimed_amount_ngn\": 50000,\n  \"actual_amount_ngn\": 5000,\n  \"reference\": \"HP-440291-OKON\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Receipt displays NGN 50,000 but bank alert for the same reference shows NGN 5,000\",\n    \"Amount inflated 10x; consistent with a doctored screenshot\",\n    \"Reference, beneficiary, payer, bank, and status do match the bank alert\",\n    \"A real NGN 5,000 SUCCESS payment exists and matches the amount owed\",\n    \"Receipt cannot be confirmed as presented due to amount mismatch\"\n  ]\n}\n```"
+}

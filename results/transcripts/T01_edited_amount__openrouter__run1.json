@@ -1,0 +1,47 @@
+{
+  "task_id": "T01_edited_amount",
+  "run": 1,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "SUSPICIOUS",
+    "claimed_amount_ngn": 50000,
+    "actual_amount_ngn": 5000,
+    "reference": "HP-440291-OKON",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Receipt displays NGN 50,000 but bank alert for the same reference shows NGN 5,000",
+      "Amount discrepancy of NGN 45,000 indicates likely edited/altered screenshot",
+      "Reference, beneficiary, bank, payer, and timestamp all match the bank alert",
+      "Actual credit of NGN 5,000 is less than the NGN 5,000 owed only if receipt were genuine; seller is owed 5,000 and only 5,000 arrived, so receipt overstates payment by 10x",
+      "Do not release goods based on the receipt amount; only NGN 5,000 is verified as received"
+    ]
+  },
+  "grade": {
+    "passed": true,
+    "score": 1.0,
+    "verdict_match": true,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": []
+  },
+  "elapsed_ms": 3274,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"SUSPICIOUS\",\n  \"claimed_amount_ngn\": 50000,\n  \"actual_amount_ngn\": 5000,\n  \"reference\": \"HP-440291-OKON\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Receipt displays NGN 50,000 but bank alert for the same reference shows NGN 5,000\",\n    \"Amount discrepancy of NGN 45,000 indicates likely edited/altered screenshot\",\n    \"Reference, beneficiary, bank, payer, and timestamp all match the bank alert\",\n    \"Actual credit of NGN 5,000 is less than the NGN 5,000 owed only if receipt were genuine; seller is owed 5,000 and only 5,000 arrived, so receipt overstates payment by 10x\",\n    \"Do not release goods based on the receipt amount; only NGN 5,000 is verified as received\"\n  ]\n}\n```"
+}

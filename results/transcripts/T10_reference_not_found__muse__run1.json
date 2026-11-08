@@ -1,0 +1,48 @@
+{
+  "task_id": "T10_reference_not_found",
+  "run": 1,
+  "backend": "muse",
+  "model": "muse-spark-1.3",
+  "prediction": {
+    "verdict": "not_confirmed",
+    "claimed_amount_ngn": 11000,
+    "actual_amount_ngn": 0,
+    "reference": "GTB-GHOST-4040",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "No bank alert exists for reference GTB-GHOST-4040",
+      "Only bank alert found is GTB-OTHER-1111 for NGN 3500 from Funke Adeyemi, unrelated to claimed payment",
+      "Claimed NGN 11000 credit to Adaora Okonkwo cannot be confirmed"
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'NOT_CONFIRMED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 24115,
+  "meta": {
+    "backend": "muse",
+    "model": "muse-spark-1.3",
+    "modality": "vision"
+  },
+  "raw_text": "{\"verdict\":\"not_confirmed\",\"claimed_amount_ngn\":11000,\"actual_amount_ngn\":0,\"reference\":\"GTB-GHOST-4040\",\"beneficiary_name\":\"Adaora Okonkwo\",\"beneficiary_bank\":\"Harbor MFB\",\"payer_name\":\"Chinedu Balogun\",\"status_on_receipt\":\"SUCCESS\",\"reasons\":[\"No bank alert exists for reference GTB-GHOST-4040\",\"Only bank alert found is GTB-OTHER-1111 for NGN 3500 from Funke Adeyemi, unrelated to claimed payment\",\"Claimed NGN 11000 credit to Adaora Okonkwo cannot be confirmed\"]}"
+}

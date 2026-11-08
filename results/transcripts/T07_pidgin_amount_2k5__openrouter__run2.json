@@ -1,0 +1,49 @@
+{
+  "task_id": "T07_pidgin_amount_2k5",
+  "run": 2,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "GENUINE",
+    "claimed_amount_ngn": 2500,
+    "actual_amount_ngn": 2500,
+    "reference": "PB-2K5-8801",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Receipt display amount of NGN 2,500 matches the informal narration '2k5', which in Nigerian Pidgin naira talk means two thousand five hundred naira.",
+      "Independent bank alert from Harbor MFB confirms NGN 2,500 with the same reference PB-2K5-8801, payer Chinedu Balogun, and beneficiary Adaora Okonkwo.",
+      "Beneficiary name and bank on the receipt match the seller's expected details (Adaora Okonkwo, Harbor MFB).",
+      "Receipt status is SUCCESS and timestamps on receipt (13:17:02 WAT) and bank alert (13:17:00 WAT) are consistent.",
+      "No discrepancy between claimed amount, receipt digits, narration, and bank evidence; no prior payments needed to reconcile."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'GENUINE' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 17667,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"GENUINE\",\n  \"claimed_amount_ngn\": 2500,\n  \"actual_amount_ngn\": 2500,\n  \"reference\": \"PB-2K5-8801\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Receipt display amount of NGN 2,500 matches the informal narration '2k5', which in Nigerian Pidgin naira talk means two thousand five hundred naira.\",\n    \"Independent bank alert from Harbor MFB confirms NGN 2,500 with the same reference PB-2K5-8801, payer Chinedu Balogun, and beneficiary Adaora Okonkwo.\",\n    \"Beneficiary name and bank on the receipt match the seller's expected details (Adaora Okonkwo, Harbor MFB).\",\n    \"Receipt status is SUCCESS and timestamps on receipt (13:17:02 WAT) and bank alert (13:17:00 WAT) are consistent.\",\n    \"No discrepancy between claimed amount, receipt digits, narration, and bank evidence; no prior payments needed to reconcile.\"\n  ]\n}\n```"
+}

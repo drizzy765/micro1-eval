@@ -1,0 +1,48 @@
+{
+  "task_id": "T02_reused_reference",
+  "run": 3,
+  "backend": "muse",
+  "model": "muse-spark-1.3",
+  "prediction": {
+    "verdict": "INVALID",
+    "claimed_amount_ngn": 12000,
+    "actual_amount_ngn": 0,
+    "reference": "GTB-SESS-991120",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Reference GTB-SESS-991120 already settled prior order ORD-OLD-77 on 2026-10-28 09:15:03 WAT and cannot confirm a new payment",
+      "No new inbound bank alert exists for 2026-11-04 18:01:44 WAT; receipt timestamp does not match bank record",
+      "Reference reuse for new NGN 12,000 sneakers order to Adaora Okonkwo is invalid"
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.3429,
+    "verdict_match": false,
+    "fields_matched": 6,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": false,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'INVALID' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 27463,
+  "meta": {
+    "backend": "muse",
+    "model": "muse-spark-1.3",
+    "modality": "vision"
+  },
+  "raw_text": "{\"verdict\":\"INVALID\",\"claimed_amount_ngn\":12000,\"actual_amount_ngn\":0,\"reference\":\"GTB-SESS-991120\",\"beneficiary_name\":\"Adaora Okonkwo\",\"beneficiary_bank\":\"Harbor MFB\",\"payer_name\":\"Chinedu Balogun\",\"status_on_receipt\":\"SUCCESS\",\"reasons\":[\"Reference GTB-SESS-991120 already settled prior order ORD-OLD-77 on 2026-10-28 09:15:03 WAT and cannot confirm a new payment\",\"No new inbound bank alert exists for 2026-11-04 18:01:44 WAT; receipt timestamp does not match bank record\",\"Reference reuse for new NGN 12,000 sneakers order to Adaora Okonkwo is invalid\"]}"
+}

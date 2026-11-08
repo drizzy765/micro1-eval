@@ -1,0 +1,49 @@
+{
+  "task_id": "T03_wrong_beneficiary",
+  "run": 1,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "REJECTED",
+    "claimed_amount_ngn": 8500,
+    "actual_amount_ngn": 8500,
+    "reference": "PB-772210-IBRA",
+    "beneficiary_name": "Ibrahim Musa",
+    "beneficiary_bank": "PointBridge",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Beneficiary name mismatch: receipt shows 'Ibrahim Musa', seller is 'Adaora Okonkwo'",
+      "Beneficiary bank mismatch: receipt shows 'PointBridge', seller bank is 'Harbor MFB'",
+      "Bank evidence (open_banking_trace) confirms the transfer was actually credited to Ibrahim Musa at PointBridge, not the seller",
+      "Narration 'For Adaora' name-drops the seller but does not change the actual beneficiary; funds did not reach the seller",
+      "Amount (NGN 8,500) and reference match the bank trace, but correct amount to the wrong recipient is not a valid payment to the seller"
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'REJECTED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 23015,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"REJECTED\",\n  \"claimed_amount_ngn\": 8500,\n  \"actual_amount_ngn\": 8500,\n  \"reference\": \"PB-772210-IBRA\",\n  \"beneficiary_name\": \"Ibrahim Musa\",\n  \"beneficiary_bank\": \"PointBridge\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Beneficiary name mismatch: receipt shows 'Ibrahim Musa', seller is 'Adaora Okonkwo'\",\n    \"Beneficiary bank mismatch: receipt shows 'PointBridge', seller bank is 'Harbor MFB'\",\n    \"Bank evidence (open_banking_trace) confirms the transfer was actually credited to Ibrahim Musa at PointBridge, not the seller\",\n    \"Narration 'For Adaora' name-drops the seller but does not change the actual beneficiary; funds did not reach the seller\",\n    \"Amount (NGN 8,500) and reference match the bank trace, but correct amount to the wrong recipient is not a valid payment to the seller\"\n  ]\n}\n```"
+}

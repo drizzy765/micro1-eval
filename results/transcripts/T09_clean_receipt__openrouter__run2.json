@@ -1,0 +1,49 @@
+{
+  "task_id": "T09_clean_receipt",
+  "run": 2,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "CONFIRMED",
+    "claimed_amount_ngn": 18000,
+    "actual_amount_ngn": 18000,
+    "reference": "HB-CLEAN-6610",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Receipt amount 18000 NGN matches bank alert amount 18000 NGN",
+      "Reference HB-CLEAN-6610 matches between receipt and bank alert",
+      "Beneficiary name Adaora Okonkwo and bank Harbor MFB match the seller's expected details",
+      "Payer name Chinedu Balogun matches between receipt and bank alert",
+      "Receipt status SUCCESS is confirmed by bank alert status SUCCESS",
+      "Timestamps differ by 2 seconds (15:02:10 vs 15:02:08 WAT), within the two-minute tolerance",
+      "No conflicting prior payments on record"
+    ]
+  },
+  "grade": {
+    "passed": true,
+    "score": 1.0,
+    "verdict_match": true,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": []
+  },
+  "elapsed_ms": 29655,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"CONFIRMED\",\n  \"claimed_amount_ngn\": 18000,\n  \"actual_amount_ngn\": 18000,\n  \"reference\": \"HB-CLEAN-6610\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Receipt amount 18000 NGN matches bank alert amount 18000 NGN\",\n    \"Reference HB-CLEAN-6610 matches between receipt and bank alert\",\n    \"Beneficiary name Adaora Okonkwo and bank Harbor MFB match the seller's expected details\",\n    \"Payer name Chinedu Balogun matches between receipt and bank alert\",\n    \"Receipt status SUCCESS is confirmed by bank alert status SUCCESS\",\n    \"Timestamps differ by 2 seconds (15:02:10 vs 15:02:08 WAT), within the two-minute tolerance\",\n    \"No conflicting prior payments on record\"\n  ]\n}\n```"
+}

@@ -1,0 +1,48 @@
+{
+  "task_id": "T05_tampered_screenshot",
+  "run": 3,
+  "backend": "openrouter",
+  "model": "z-ai/glm-5.3-flash",
+  "prediction": {
+    "verdict": "REJECTED",
+    "claimed_amount_ngn": 20000,
+    "actual_amount_ngn": null,
+    "reference": "HP-TAMPER-0007",
+    "beneficiary_name": "Adaora Okonkwo",
+    "beneficiary_bank": "Harbor MFB",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Forensic flag: amount_digit_font_mismatch \u2014 the amount digits' font density does not match neighboring text, indicating the amount was retyped or edited onto the image.",
+      "Forensic flag: reference_row_crop_artifact \u2014 a crop line is visible under the reference row, indicating the screenshot was cropped or assembled.",
+      "Forensic flag: no_matching_bank_alert \u2014 no bank alert exists for reference HP-TAMPER-0007, so the transfer cannot be corroborated by bank records.",
+      "The receipt cannot be confirmed from the image alone due to cropping/retyping artifacts; bank evidence shows no prior payments or alerts supporting this transaction."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.3429,
+    "verdict_match": false,
+    "fields_matched": 6,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": false,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'REJECTED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 17719,
+  "meta": {
+    "backend": "openrouter",
+    "model": "z-ai/glm-5.3-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"REJECTED\",\n  \"claimed_amount_ngn\": 20000,\n  \"actual_amount_ngn\": null,\n  \"reference\": \"HP-TAMPER-0007\",\n  \"beneficiary_name\": \"Adaora Okonkwo\",\n  \"beneficiary_bank\": \"Harbor MFB\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Forensic flag: amount_digit_font_mismatch \u2014 the amount digits' font density does not match neighboring text, indicating the amount was retyped or edited onto the image.\",\n    \"Forensic flag: reference_row_crop_artifact \u2014 a crop line is visible under the reference row, indicating the screenshot was cropped or assembled.\",\n    \"Forensic flag: no_matching_bank_alert \u2014 no bank alert exists for reference HP-TAMPER-0007, so the transfer cannot be corroborated by bank records.\",\n    \"The receipt cannot be confirmed from the image alone due to cropping/retyping artifacts; bank evidence shows no prior payments or alerts supporting this transaction.\"\n  ]\n}\n```"
+}

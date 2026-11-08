@@ -1,0 +1,46 @@
+{
+  "task_id": "T03_wrong_beneficiary",
+  "run": 2,
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
+  "prediction": {
+    "verdict": "rejected",
+    "claimed_amount_ngn": 8500,
+    "actual_amount_ngn": 8500,
+    "reference": "PB-772210-IBRA",
+    "beneficiary_name": "Ibrahim Musa",
+    "beneficiary_bank": "PointBridge",
+    "payer_name": "Chinedu Balogun",
+    "status_on_receipt": "SUCCESS",
+    "reasons": [
+      "Beneficiary name on receipt (Ibrahim Musa) does not match seller's expected beneficiary name (Adaora Okonkwo).",
+      "Beneficiary bank on receipt (PointBridge) does not match seller's expected beneficiary bank (Harbor MFB)."
+    ]
+  },
+  "grade": {
+    "passed": false,
+    "score": 0.4,
+    "verdict_match": false,
+    "fields_matched": 7,
+    "fields_total": 7,
+    "field_details": {
+      "claimed_amount_ngn": true,
+      "actual_amount_ngn": true,
+      "reference": true,
+      "beneficiary_name": true,
+      "beneficiary_bank": true,
+      "payer_name": true,
+      "status_on_receipt": true
+    },
+    "catastrophic_false_confirmed": false,
+    "errors": [
+      "predicted verdict 'REJECTED' is not in ('CONFIRMED', 'SUSPICIOUS', 'NOT_FOUND', 'UNVERIFIED')"
+    ]
+  },
+  "elapsed_ms": 20457,
+  "meta": {
+    "backend": "gemini",
+    "model": "gemini-2.5-flash"
+  },
+  "raw_text": "```json\n{\n  \"verdict\": \"rejected\",\n  \"claimed_amount_ngn\": 8500,\n  \"actual_amount_ngn\": 8500,\n  \"reference\": \"PB-772210-IBRA\",\n  \"beneficiary_name\": \"Ibrahim Musa\",\n  \"beneficiary_bank\": \"PointBridge\",\n  \"payer_name\": \"Chinedu Balogun\",\n  \"status_on_receipt\": \"SUCCESS\",\n  \"reasons\": [\n    \"Beneficiary name on receipt (Ibrahim Musa) does not match seller's expected beneficiary name (Adaora Okonkwo).\",\n    \"Beneficiary bank on receipt (PointBridge) does not match seller's expected beneficiary bank (Harbor MFB).\"\n  ]\n}\n```"
+}
