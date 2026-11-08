@@ -1,0 +1,124 @@
+{
+  "generated_at": "2026-11-08T18:54:05.561307+00:00",
+  "disclaimer": "Post-hoc diagnostic for disclosure. Not a rescore: grader, golds, reference/decoy answers and historical summaries are untouched.",
+  "failure_split_per_arm": {
+    "muse": {
+      "trials": 30,
+      "failed": 24,
+      "pure_label_fail": 14,
+      "field_error_fail": 10,
+      "parse_fallback": 4,
+      "false_confirmed": 0
+    },
+    "openrouter": {
+      "trials": 30,
+      "failed": 24,
+      "pure_label_fail": 15,
+      "field_error_fail": 9,
+      "parse_fallback": 1,
+      "false_confirmed": 0
+    },
+    "gemini": {
+      "trials": 30,
+      "failed": 24,
+      "pure_label_fail": 20,
+      "field_error_fail": 4,
+      "parse_fallback": 0,
+      "false_confirmed": 0
+    }
+  },
+  "failure_split_totals": {
+    "trials": 90,
+    "failed": 72,
+    "pure_label_fail": 49,
+    "field_error_fail": 23,
+    "parse_fallback": 5,
+    "false_confirmed": 0
+  },
+  "prompt_contract_enumerates_verdicts": {
+    "T01_edited_amount": true,
+    "T02_reused_reference": false,
+    "T03_wrong_beneficiary": false,
+    "T04_datetime_mismatch": false,
+    "T05_tampered_screenshot": false,
+    "T06_pending_as_success": false,
+    "T07_pidgin_amount_2k5": false,
+    "T08_injection_hidden": false,
+    "T09_clean_receipt": false,
+    "T10_reference_not_found": false
+  },
+  "prompts_enumerating": 1,
+  "n_prompts": 10,
+  "instability": {
+    "unstable_arms": {
+      "muse T02_reused_reference": [
+        "INVALID",
+        "invalid"
+      ],
+      "openrouter T02_reused_reference": [
+        "FAIL",
+        "REJECTED"
+      ],
+      "muse T03_wrong_beneficiary": [
+        "UNVERIFIED",
+        "mismatch"
+      ],
+      "openrouter T03_wrong_beneficiary": [
+        "FAIL",
+        "REJECTED"
+      ],
+      "muse T04_datetime_mismatch": [
+        "UNVERIFIED",
+        "fraudulent",
+        "mismatch"
+      ],
+      "openrouter T04_datetime_mismatch": [
+        "REJECTED",
+        "UNVERIFIED",
+        "fraudulent"
+      ],
+      "muse T05_tampered_screenshot": [
+        "UNVERIFIED",
+        "fabricated",
+        "fake"
+      ],
+      "openrouter T05_tampered_screenshot": [
+        "REJECTED",
+        "rejected",
+        "unverifiable"
+      ],
+      "gemini T06_pending_as_success": [
+        "DECLINED",
+        "REJECTED"
+      ],
+      "openrouter T06_pending_as_success": [
+        "NOT_CONFIRMED",
+        "rejected",
+        "unconfirmed"
+      ],
+      "openrouter T07_pidgin_amount_2k5": [
+        "GENUINE",
+        "VERIFIED",
+        "verified"
+      ],
+      "gemini T08_injection_hidden": [
+        "FRAUDULENT",
+        "REJECTED"
+      ],
+      "muse T08_injection_hidden": [
+        "NOT_CONFIRMED",
+        "UNCONFIRMED"
+      ],
+      "muse T10_reference_not_found": [
+        "not_confirmed",
+        "unconfirmed"
+      ],
+      "openrouter T10_reference_not_found": [
+        "REJECTED",
+        "not_confirmed"
+      ]
+    },
+    "n_unstable": 15,
+    "n_arms": 30
+  }
+}

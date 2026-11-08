@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-06T18:17:42.570308+00:00",
-  "backend": "openrouter",
-  "model": "z-ai/glm-5.3-flash",
+  "generated_at": "2026-11-08T17:26:20.544121+00:00",
+  "backend": "gemini",
+  "model": "gemini-2.5-flash",
   "runs_per_task": 3,
   "n_tasks": 10,
   "n_predictions": 30,
@@ -40,7 +40,7 @@
       "passes": 0,
       "pass_rate": 0.0,
       "catastrophic_false_confirmed": 0,
-      "mean_score": 0.2667
+      "mean_score": 0.4
     },
     {
       "task_id": "T05_tampered_screenshot",
@@ -48,7 +48,7 @@
       "passes": 0,
       "pass_rate": 0.0,
       "catastrophic_false_confirmed": 0,
-      "mean_score": 0.3429
+      "mean_score": 0.4
     },
     {
       "task_id": "T06_pending_as_success",
@@ -56,7 +56,7 @@
       "passes": 0,
       "pass_rate": 0.0,
       "catastrophic_false_confirmed": 0,
-      "mean_score": 0.3619
+      "mean_score": 0.3429
     },
     {
       "task_id": "T07_pidgin_amount_2k5",
@@ -72,7 +72,7 @@
       "passes": 0,
       "pass_rate": 0.0,
       "catastrophic_false_confirmed": 0,
-      "mean_score": 0.3619
+      "mean_score": 0.381
     },
     {
       "task_id": "T09_clean_receipt",
@@ -88,7 +88,7 @@
       "passes": 0,
       "pass_rate": 0.0,
       "catastrophic_false_confirmed": 0,
-      "mean_score": 0.381
+      "mean_score": 0.4
     }
   ],
   "manifest_sha256": {
@@ -103,5 +103,8 @@
     "/mnt/c/Users/USER/Documents/micro1eval/tasks/T09_clean_receipt.json": "62c848938c7cf63f29e8dabd10e9abf537b5c2e64c9db4ef01a76c7d4d4f59da",
     "/mnt/c/Users/USER/Documents/micro1eval/tasks/T10_reference_not_found.json": "2fcc490817c0615670c22331f6be7d2a48432caca0602d24577ead4bf0506975",
     "/mnt/c/Users/USER/Documents/micro1eval/tasks/catalog.json": "62aeab4b01d8f73b1198c8e774cda32ab35907271798dce85910fab887475f6a"
-  }
+  },
+  "run_id": "gemini-gemini-2.5-flash",
+  "run_dir": "results/runs/gemini-gemini-2.5-flash-20261108T172302Z",
+  "composition": "22 legacy trials from results/transcripts/ (T01-T07 x3, T08 run1) + 8 resumed trials from the named run_dir (T08 run2-3, T09 x3, T10 x3); no transcript overwritten, no label remapping"
 }

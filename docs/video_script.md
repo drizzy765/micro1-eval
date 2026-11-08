@@ -4,6 +4,43 @@ Record this after the model numbers exist. Upload unlisted to YouTube (or Drive,
 
 Suggested voice: clear US/international English, same register as the Sell-Safe demo. No emoji on screen text.
 
+## A. Steps to take before you press record
+
+1. Numbers freeze: confirm `results/summary-gemini-gemini-2.5-flash-20261108T172302Z.json`
+   (6/30), `reports/diagnostic-20261108.json`, and `reports/cleanroom-20261108.txt`
+   are in the tree. Do not run any more model calls — the arms are final.
+2. Rehearse once with a timer. Target 4:00–4:30 of speech so edits or retakes
+   still land under the 5:00 hard stop.
+3. Secrets hygiene: close every tab/file holding API keys (`.env`, OpenRouter /
+   AI Studio dashboards, email). Open a fresh terminal — old scrollback can
+   leak keys on screen. Never type `cat .env` on camera.
+4. Layout: one clean desktop, taskbar clock visible (proves the take is one
+   shot if you want it to), browser zoom 125%+, terminal font 14pt+.
+5. Mic check: 10-second test recording, play it back — intelligible audio
+   matters more than camera quality. No face needed; AI voiceover is allowed.
+
+## B. Screen-record runbook (what to capture, in order)
+
+Tool: Xbox Game Bar (`Win+G`) or OBS, fullscreen 1080p, system audio off,
+mic on. Record each scene in the list below; the spoken script (sections
+0:00–5:00) plays over these shots.
+
+| # | Screen | How | Seconds |
+| --- | --- | --- | --- |
+| 1 | T01 receipt PNG (`assets/`) next to its bank alert | Open image + task JSON side by side | ~20 |
+| 2 | Repo tree + `tasks/catalog.json` + one gold object | VS Code explorer, scroll slowly | ~15 |
+| 3 | `pytest` green (14 passed) + baseline 10/10 | Fresh terminal, run both live | ~25 |
+| 4 | Four receipt PNGs (T01, T02, T06, T08) + T07/T09 controls | Image viewer, one sentence each | ~45 |
+| 5 | `reports/charts.html` open in a browser | Hover the bars so tooltips show exact numbers | ~50 |
+| 6 | One transcript quote (T02 Gemini: 7/7 fields, verdict REJECTED) | Scroll the JSON slowly | ~20 |
+| 7 | Limitations list (`reports/eval-report.md`) | Highlight the diagnostic + small-sample lines | ~25 |
+| 8 | README rerun snippet | Static shot while closing line plays | ~15 |
+
+After recording: trim head/tail only (no spliced middle — one honest take),
+export 1080p MP4, upload unlisted (YouTube) or anyone-with-link (Drive),
+then verify in a logged-out/private window: link opens, audio plays, charts
+legible at 480p. Keep the file out of the ZIP.
+
 ## 0:00–0:25 — Problem
 
 On screen: a HorizonPay-style receipt that looks perfect, then the matching bank alert with a different amount (T01).
@@ -20,7 +57,7 @@ Say:
 
 > We wrote ten synthetic tasks. Every name and account is fictional, and the receipts carry a disclaimer — no real bank logos. Each task has bank-alert evidence, a gold verdict, a reference answer that must pass the grader, and a decoy that must fail. Verdicts are CONFIRMED, SUSPICIOUS, NOT_FOUND or UNVERIFIED. A false CONFIRMED — saying a fake receipt is real — scores zero, even if the extracted fields look right.
 
-Show pytest going green: `11 passed`.
+Show pytest going green: `14 passed`.
 
 ## 1:10–2:10 — The suite, quickly
 
@@ -36,15 +73,15 @@ Flip through four images, one sentence each:
 
 On screen: the summary table from `docs/failure_taxonomy.md` and `results/latest_summary.json`.
 
-Say the real numbers (audited 6 Nov 2026, 112 completed model trials):
+Say the real numbers (audited 6 Nov 2026 with Gemini completed 8 Nov, 120 completed model trials):
 
-> We ran GPT-4.1-mini, Muse Spark, and GLM 5.3 Flash three times on each of ten tasks, plus a partial Gemini arm blocked by quota at 22 trials. The deterministic baseline — the same rules we use in Sell-Safe — scored ten out of ten with zero false confirms. Every frontier arm scored 6 out of 30 with zero false CONFIRMED: nobody confirmed a fake receipt. But almost nobody used the required verdicts either. Here is Muse, looking at the actual receipt image, answering "legit" on a reused reference it correctly identified as already settled. Here is GLM answering "verified" on a '2k5' amount it correctly parsed as 2,500 naira. A seller reading "legit" or "verified" releases the goods — that is the failure that matters, even though the grader scores it zero.
+> We ran GPT-4.1-mini, Muse Spark, GLM 5.3 Flash, and Gemini 2.5 Flash three times on each of ten tasks. The deterministic baseline — the same rules we use in Sell-Safe — scored ten out of ten with zero false confirms. Every frontier arm scored 6 out of 30 with zero false CONFIRMED: nobody confirmed a fake receipt. But almost nobody used the required verdicts either. Here is Muse, looking at the actual receipt image, answering "legit" on a reused reference it correctly identified as already settled. Here is GLM answering "verified" on a '2k5' amount it correctly parsed as 2,500 naira. A seller reading "legit" or "verified" releases the goods — that is the failure that matters, even though the grader scores it zero.
 
 Then add one honesty beat, on screen with the limitations list:
 
-> Caveats, all published: 30 trials per arm at most, so zero false confirms is an observation, not proof of safety. GPT's trial transcripts were lost to a file-keying bug before per-run directories existed, so it contributes tallies only. Gemini is partial at 22 of 30. Text-input and vision-input arms are compared separately because their inputs differed.
+> Caveats, all published: 30 trials per arm at most, so zero false confirms is an observation, not proof of safety. GPT's trial transcripts were lost to a file-keying bug before per-run directories existed, so it contributes tallies only. Text-input and vision-input arms are compared separately because their inputs differed.
 
-Do not overclaim. Say plainly that T01 and T09 pass 3/3 on every arm that attempted them (Gemini never attempted T09), and that semantic correctness beyond the strict verdict is unresolved.
+Do not overclaim. Say plainly that T01 and T09 pass 3/3 on every arm, and that semantic correctness beyond the strict verdict is unresolved. Disclose the confound in one sentence: only T01's prompt lists the four legal verdicts, so most wrong labels may reflect a missing answer vocabulary — but 15 of 30 task-arms also gave different verdicts on identical retries, which no vocabulary fix explains.
 
 ## 3:40–4:30 — How to rerun, and close
 

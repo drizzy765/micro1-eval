@@ -13,9 +13,9 @@ Finish the remaining eval work for the 7 Nov 2026 target (hard deadline 8 Nov 9:
 ## Task List
 
 ### Phase 1: Frontier runs completion
-- [ ] Task 1: Finish Gemini 3-trial arm after quota reset
+- [x] Task 1: Finish Gemini 3-trial arm after quota reset (DONE 8 Nov: 30/30, 6 passes, 0 false CONFIRMED)
 - [x] Task 2: DROPPED — Claude arm removed (cost, user decision 7 Nov)
-- [ ] Task 3: Resolve Groq/Llama scope and `results/runs/` gitignore
+- [x] Task 3: Resolve Groq/Llama scope and `results/runs/` gitignore (DONE 8 Nov: Groq still 403, stays dropped; runs/ + transcripts/ gitignored)
 
 ### Checkpoint: Frontier runs
 - [ ] All attempted arms have timestamped summaries plus unique run dirs

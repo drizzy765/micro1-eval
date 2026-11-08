@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Receipt eval — interactive charts</title>
+<style>
+  :root {
+    --ink: #1a1a1a; --muted: #555; --line: #ddd; --bg: #fff;
+    --baseline: #2e7d32; --gpt: #c62828; --muse: #1565c0;
+    --glm: #00695c; --gemini: #ef6c00; --fallback: #757575;
+  }
+  body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         color: var(--ink); background: var(--bg); margin: 0 auto;
+         max-width: 880px; padding: 24px 16px 64px; line-height: 1.5; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  h2 { font-size: 1.1rem; margin: 32px 0 4px; }
+  p.sub, p.src { color: var(--muted); font-size: 0.85rem; margin: 4px 0; }
+  .controls { margin: 8px 0 0; display: flex; gap: 8px; }
+  .controls button { font: inherit; font-size: 0.85rem; padding: 4px 12px;
+    border: 1px solid var(--line); background: #f4f4f4; border-radius: 4px; cursor: pointer; }
+  .controls button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .controls button:focus-visible, g.bar:focus { outline: 2px solid var(--muse); outline-offset: 2px; }
+  svg.chart { width: 100%; height: auto; display: block; margin-top: 8px; }
+  svg text { font-family: inherit; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.85rem; margin-top: 8px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { border-bottom: 2px solid var(--ink); }
+  code.chip { background: #f4f4f4; border: 1px solid var(--line); border-radius: 4px;
+    padding: 0 5px; margin: 0 2px; white-space: nowrap; }
+  .note { border: 1px solid var(--line); border-radius: 4px; padding: 8px 12px;
+    font-size: 0.85rem; margin-top: 24px; }
+</style>
+</head>
+<body>
+<h1>Receipt eval — interactive charts</h1>
+<p class="sub">120 completed model trials (Muse vision 30, GLM text 30, Gemini text 30, GPT aggregate-only 30) + deterministic baseline 10/10. Hover or Tab onto any bar for exact numbers.</p>
+<p class="src">Source: intact transcripts under <code>results/transcripts/</code> + the completed Gemini run dir. Regenerate: <code>.venv/bin/python reports/diagnostic_labels.py</code>. Disclosure, not a rescore.</p>
+
+<h2>1. Exact-schema pass rate by arm</h2>
+<div class="controls" role="group" aria-label="Pass-rate units">
+  <button id="btn-count" aria-pressed="true">Counts</button>
+  <button id="btn-pct" aria-pressed="false">Percent</button>
+</div>
+<svg class="chart" id="pass-chart" viewBox="0 0 560 260" role="img" aria-label="Bar chart of exact-schema pass rate by arm"></svg>
+
+<h2>2. What the 72 failures look like</h2>
+<p class="sub">GPT excluded (aggregate-only, no transcripts). Pure-label = every compared field correct, only the verdict string wrong.</p>
+<svg class="chart" id="fail-chart" viewBox="0 0 560 180" role="img" aria-label="Stacked bar chart of failure classes by arm"></svg>
+
+<h2>3. Run-to-run instability: 15 of 30 task-arms</h2>
+<p class="sub">Same prompt, temperature 0.0, different verdict strings across the 3 runs. No vocabulary fix explains this.</p>
+<table id="stab-table">
+  <thead><tr><th scope="col">Arm</th><th scope="col">Task</th><th scope="col">Distinct verdicts observed</th></tr></thead>
+  <tbody></tbody>
+</table>
+
+<div class="note"><strong>Reading this honestly.</strong> Only T01's prompt lists the four legal verdicts, so most pure-label failures are consistent with the model never being shown the label set — a prompt-design confound, disclosed in <code>reports/eval-report.md</code>. The instability above and the 5 parse fallbacks survive that confound.</div>
+
+<script>
+"use strict";
+var NS = "http://www.w3.org/2000/svg";
+var PASS = [
+  { arm: "Baseline (rules)", color: "#2e7d32", pass: 10, n: 10 },
+  { arm: "GPT-4.1-mini (text, aggregate-only)", color: "#c62828", pass: 6, n: 30 },
+  { arm: "Muse Spark 1.3 (vision)", color: "#1565c0", pass: 6, n: 30 },
+  { arm: "GLM 5.3 Flash (text)", color: "#00695c", pass: 6, n: 30 },
+  { arm: "Gemini 2.5 Flash (text)", color: "#ef6c00", pass: 6, n: 30 }
+];
+var FAIL = [
+  { arm: "Muse Spark 1.3", color: "#1565c0", pure: 14, field: 6, fallback: 4 },
+  { arm: "GLM 5.3 Flash", color: "#00695c", pure: 15, field: 8, fallback: 1 },
+  { arm: "Gemini 2.5 Flash", color: "#ef6c00", pure: 20, field: 4, fallback: 0 }
+];
+var STAB = [
+  ["Muse", "T02 reused reference", ["INVALID", "invalid"]],
+  ["GLM", "T02 reused reference", ["FAIL", "REJECTED"]],
+  ["Muse", "T03 wrong beneficiary", ["UNVERIFIED", "mismatch"]],
+  ["GLM", "T03 wrong beneficiary", ["FAIL", "REJECTED"]],
+  ["Muse", "T04 datetime mismatch", ["UNVERIFIED", "fraudulent", "mismatch"]],
+  ["GLM", "T04 datetime mismatch", ["REJECTED", "UNVERIFIED", "fraudulent"]],
+  ["Muse", "T05 tampered screenshot", ["UNVERIFIED", "fabricated", "fake"]],
+  ["GLM", "T05 tampered screenshot", ["REJECTED", "rejected", "unverifiable"]],
+  ["Gemini", "T06 pending as success", ["DECLINED", "REJECTED"]],
+  ["GLM", "T06 pending as success", ["NOT_CONFIRMED", "rejected", "unconfirmed"]],
+  ["GLM", "T07 pidgin 2k5", ["GENUINE", "VERIFIED", "verified"]],
+  ["Gemini", "T08 injection", ["FRAUDULENT", "REJECTED"]],
+  ["Muse", "T08 injection", ["NOT_CONFIRMED", "UNCONFIRMED"]],
+  ["Muse", "T10 reference not found", ["not_confirmed", "unconfirmed"]],
+  ["GLM", "T10 reference not found", ["REJECTED", "not_confirmed"]]
+];
+
+function el(name, attrs, parent) {
+  var e = document.createElementNS(NS, name);
+  for (var k in attrs) e.setAttribute(k, attrs[k]);
+  parent.appendChild(e);
+  return e;
+}
+function label(parent, x, y, text, anchor) {
+  var t = el("text", { x: x, y: y, "font-size": 12,
+    "text-anchor": anchor || "start" }, parent);
+  t.textContent = text;
+  return t;
+}
+/* Chart 1: pass rate, toggleable counts/percent. */
+var passSvg = document.getElementById("pass-chart");
+var ROW_H = 40, TOP = 16, BAR_X = 250, BAR_MAX = 250, SCALE = BAR_MAX / 32;
+function drawPass(mode) {
+  while (passSvg.firstChild) passSvg.removeChild(passSvg.firstChild);
+  PASS.forEach(function (d, i) {
+    var y = TOP + i * ROW_H;
+    label(passSvg, 8, y + 16, d.arm);
+    var g = el("g", { "class": "bar", tabindex: "0", role: "img",
+      "aria-label": d.arm + ": " + d.pass + " of " + d.n }, passSvg);
+    var w = Math.max(2, (mode === "pct" ? d.pass / d.n * 100 / 100 * 32 : d.pass) * SCALE);
+    el("rect", { x: BAR_X, y: y, width: w, height: 18, fill: d.color }, g);
+    var t = el("title", {}, g);
+    var pct = (d.pass / d.n * 100).toFixed(d.n === 10 ? 0 : 1);
+    t.textContent = d.arm + " — " + d.pass + "/" + d.n + " (" + pct + "%)";
+    label(passSvg, BAR_X + w + 6, y + 15,
+      mode === "pct" ? pct + "%" : d.pass + "/" + d.n);
+  });
+}
+var btnC = document.getElementById("btn-count");
+var btnP = document.getElementById("btn-pct");
+function setMode(mode) {
+  drawPass(mode);
+  btnC.setAttribute("aria-pressed", mode === "count" ? "true" : "false");
+  btnP.setAttribute("aria-pressed", mode === "pct" ? "true" : "false");
+}
+btnC.addEventListener("click", function () { setMode("count"); });
+btnP.addEventListener("click", function () { setMode("pct"); });
+drawPass("count");
+
+/* Chart 2: stacked failure split, 24 failed trials per arm. */
+var failSvg = document.getElementById("fail-chart");
+var FSCALE = 300 / 24;
+FAIL.forEach(function (d, i) {
+  var y = 16 + i * 52;
+  label(failSvg, 8, y + 16, d.arm);
+  var g = el("g", { "class": "bar", tabindex: "0", role: "img",
+    "aria-label": d.arm + ": " + d.pure + " pure-label, " + d.field +
+    " field-error, " + d.fallback + " parse fallbacks" }, failSvg);
+  var x = 250;
+  var t = el("title", {}, g);
+  t.textContent = d.arm + " — pure-label " + d.pure + ", field-error " +
+    d.field + ", parse fallback " + d.fallback + " (24 failed)";
+  [["pure", d.pure, d.color], ["field", d.field, "#ef6c00"],
+   ["fallback", d.fallback, "#757575"]].forEach(function (seg) {
+    if (!seg[1]) return;
+    el("rect", { x: x, y: y, width: seg[1] * FSCALE, height: 18,
+      fill: seg[2], "aria-hidden": "true" }, g);
+    x += seg[1] * FSCALE;
+  });
+  label(failSvg, x + 6, y + 15, d.pure + " / " + d.field + " / " + d.fallback);
+});
+label(failSvg, 8, 168, "order per bar: pure-label / field-error / parse fallback")
+  .setAttribute("font-size", 11);
+
+/* Chart 3: instability table. */
+var tbody = document.querySelector("#stab-table tbody");
+STAB.forEach(function (row) {
+  var tr = document.createElement("tr");
+  [["td", row[0]], ["td", row[1]]].forEach(function (cell) {
+    var td = document.createElement(cell[0]);
+    td.textContent = cell[1];
+    tr.appendChild(td);
+  });
+  var td = document.createElement("td");
+  row[2].forEach(function (v) {
+    var c = document.createElement("code");
+    c.className = "chip";
+    c.textContent = v;
+    td.appendChild(c);
+  });
+  tr.appendChild(td);
+  tbody.appendChild(tr);
+});
+</script>
+</body>
+</html>

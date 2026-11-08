@@ -1,20 +1,20 @@
 # Unfinished tasks — micro1 eval (tracked here, see `tasks/plan.md`)
 
-## Task 1: Finish Gemini 3-trial arm after quota reset
+## Task 1: Finish Gemini 3-trial arm after quota reset — DONE (8 Nov 2026)
 
-**Description:** Run the remaining 8 Gemini calls (T08 run2–run3, T09 x3, T10 x3) after a full daily reset so the arm reaches 30/30.
+**Description:** Run the remaining 8 Gemini calls (T08 run2–run3, T09 x3, T10 x3) after a full daily reset so the arm reaches 30/30. Done 8 Nov: 8/8 landed first try, no pre-probe, combined 6/30 (T01+T09 3/3), 0 false CONFIRMED over 24 negatives.
 
 **Acceptance criteria:**
-- [ ] `results/runs/gemini-gemini-2.5-flash-<new-stamp>/` holds the 8 new trial JSONs, old 22 intact
-- [ ] Timestamped `results/summary-*.json` records 30 trials, passes, and 0 false CONFIRMED over completed negatives
-- [ ] `results/audit-*.json` regenerated or appended for the completed arm
+- [x] `results/runs/gemini-gemini-2.5-flash-20261108T172302Z/` holds the 8 new trial JSONs, old 22 intact
+- [x] Timestamped `results/summary-gemini-gemini-2.5-flash-20261108T172302Z.json` records 30 trials, 6 passes, 0 false CONFIRMED over completed negatives
+- [x] `results/audit-20261108-gemini-complete.json` written for the completed arm
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest -q`
-- [ ] Baseline succeeds: `python -m runner.run --backend baseline --runs 1`
-- [ ] Manual check: count trial files per task (T08–T10 show 3 each), confirm no overwrite of prior run dir
+- [x] Tests pass: `python -m pytest -q`
+- [x] Baseline succeeds: `python -m runner.run --backend baseline --runs 1`
+- [x] Manual check: count trial files per task (T08–T10 show 3 each), confirm no overwrite of prior run dir
 
-**Dependencies:** None (blocked only on quota clock — 7 Nov attempt: probe + 20 landed, died on `limit: 20`; do NOT retry until next full daily reset, and skip the pre-probe since it burns a capped call)
+**Dependencies:** None (was blocked on quota clock — 7 Nov attempt: probe + 20 landed, died on `limit: 20`; 8 Nov reset cleared it)
 
 **Files likely touched:**
 - `results/runs/gemini-gemini-2.5-flash-<stamp>/`
@@ -34,7 +34,7 @@
 **Verification:**
 - [x] `grep -r Claude` shows only historical/dropped notes, no open Claude tasks
 
-**Dependencies:** None (dropped; was blocked on credits)
+**Dependencies:** None (dropped; was blocked on credits. Groq re-probed 8 Nov: still HTTP 403 error 1010, stays dropped.)
 
 **Files touched:** plan/checklist/description/README/eval-report (docs only)
 
@@ -50,8 +50,8 @@
 - [x] `git status --short` no longer shows surprise untracked run dirs
 
 **Verification:**
-- [ ] Tests pass: `python -m pytest -q`
-- [ ] Manual check: `git status --short` clean of run dirs (or dirs intentionally tracked)
+- [x] Tests pass: `python -m pytest -q` (14 passed, 8 Nov)
+- [x] Manual check: `git status --short` clean of run dirs (runs/ + transcripts/ gitignored; 8 Nov confirmed)
 
 **Dependencies:** None
 
@@ -64,7 +64,7 @@
 
 ## Checkpoint: Frontier runs
 
-- [ ] All attempted arms have timestamped summaries plus unique run dirs
+- [x] All attempted arms have timestamped summaries plus unique run dirs (Gemini completed 8 Nov: 4 full arms × 30 + baseline)
 - [x] `python -m pytest -q` green (expect 14 passed incl. `tests/test_run_dirs.py`)
 - [x] Baseline still 10/10, 0 false CONFIRMED
 - [ ] Review with human before building ZIP
@@ -109,19 +109,19 @@
 
 **Estimated scope:** XS: 0 repo files
 
-## Task 6: Build and verify submission ZIP under 50 MB
+## Task 6: Build and verify submission ZIP under 50 MB — DONE (8 Nov 2026)
 
-**Description:** Stage a clean tree and pack code-only ZIP per `docs/submission_checklist.md`.
+**Description:** Stage a clean tree and pack code-only ZIP per `docs/submission_checklist.md`. Built `micro1-receipt-eval-submit.zip` (83 entries, 562,911 bytes) from a staged tree; includes the new diagnostic script + JSON, appendix, cleanroom log, and completed Gemini numbers.
 
 **Acceptance criteria:**
-- [ ] ZIP contains tasks, generator, grader, runner, baseline, tests, docs, assets PNGs, requirements, make files, `.env.example`, summary JSON and report tables
-- [ ] ZIP excludes `.venv/`, `.env`, `__pycache__/`, `.pytest_cache/`, videos, `*.mp4`
-- [ ] `Length` < 52428800 and no API keys found in staged copy
+- [x] ZIP contains tasks, generator, grader, runner, baseline, tests, docs, assets PNGs, requirements, make files, `.env.example`, `.gitignore`, summary JSON and report tables
+- [x] ZIP excludes `.venv/`, `.env`, `__pycache__/`, `.pytest_cache/`, run dirs, transcripts, videos, `*.mp4`
+- [x] `Length` 562911 < 52428800 and no API keys found in staged copy (pattern grep clean)
 
 **Verification:**
-- [ ] Tests pass on clean checkout: `python -m pytest -q`
-- [ ] Baseline succeeds: `python -m runner.run --backend baseline --runs 1`
-- [ ] Manual check: `Get-Item .\micro1-receipt-eval-submit.zip | Select-Object Name, Length` under limit; grep stage for keys
+- [x] Tests pass on clean checkout: `python -m pytest -q` (14 passed, fresh venv /tmp, no keys)
+- [x] Baseline succeeds: `python -m runner.run --backend baseline --runs 1` (10/10, per-file task hashes identical)
+- [x] Manual check: ZIP size and forbidden-entry scan clean (`.gitignore` flagged by naive grep only — it is required contents)
 
 **Dependencies:** Tasks 1-4 (final numbers and docs in ZIP)
 
